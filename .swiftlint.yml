@@ -1,0 +1,12 @@
+excluded: # paths to ignore during linting. overridden by `included`.
+  - Carthage
+disabled_rules:
+  - opening_brace
+  - statement_position
+line_length: 110
+type_body_length:
+  warning: 300
+  error: 400
+variable_name:
+  min_length: 0
+  max_length: 30
