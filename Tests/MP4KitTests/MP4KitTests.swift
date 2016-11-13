@@ -20,10 +20,14 @@ class MP4KitTests: XCTestCase {
     }
 
     func testParseMp4() {
-        guard let path = path(forResource: "ftyp") else {
-            XCTFail("File not found.")
-            return
-        }
+        #if SWIFT_PACKAGE
+            let path = "./Resources/ftyp"
+        #else
+            guard let path = path(forResource: "ftyp") else {
+                XCTFail("File not found.")
+                return
+            }
+        #endif
         parse(path)
     }
 
