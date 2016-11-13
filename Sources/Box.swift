@@ -79,7 +79,7 @@ func extract(_ data: Data) throws -> String {
 struct ISOBMFFContainer {
     let ftyp: FileTypeBox
 	init(path: String) throws {
-		let reader = ByteReader(filename: filename)
+		let reader = ByteReader(path: path)
         var boxes: [Box] = []
 		while reader.hasNext() {
 			guard let data: Data = reader.data(size: Constants.bufferSize) else {

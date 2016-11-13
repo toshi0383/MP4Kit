@@ -10,8 +10,8 @@ import Foundation
 
 class ByteReader {
     private let fp: UnsafeMutablePointer<FILE>
-    init(filename: String) {
-        self.fp = fopen(filename, "rb")
+    init(path: String) {
+        self.fp = fopen(path, "rb")
     }
     func next(size: Int) -> [UInt8]? {
         var buf = Array<UInt8>(repeating: 0, count: size)

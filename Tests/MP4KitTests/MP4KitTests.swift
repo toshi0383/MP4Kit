@@ -11,17 +11,17 @@ class MP4KitTests: XCTestCase {
         }
     }
 
-    func testParseMp4() {
-        parse("./Resources/ftyp")
+    func path(forResource name: String) -> String {
+        return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)!
     }
 
-    func testExample() {
+    func testParseMp4() {
+        parse(path(forResource: "ftyp"))
     }
 
 
     static var allTests : [(String, (MP4KitTests) -> () throws -> Void)] {
         return [
-            ("testExample", testExample),
             ("testParseMp4", testParseMp4),
         ]
     }
