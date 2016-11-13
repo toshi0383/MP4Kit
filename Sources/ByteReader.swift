@@ -8,6 +8,10 @@
 
 import Foundation
 
+internal struct Constants {
+    static let bufferSize: Int = 36
+}
+
 class ByteReader {
     private let fp: UnsafeMutablePointer<FILE>
     init(path: String) {
@@ -18,13 +22,13 @@ class ByteReader {
         fread(&buf, 1, size, fp)
         return buf
     }
-	func data(size: Int) -> Data? {
-		if let bytes = next(size: size) {
-			return Data(bytes: bytes)
-		} else {
-			return nil
-		}
-	}
+    func data(size: Int) -> Data? {
+        if let bytes = next(size: size) {
+            return Data(bytes: bytes)
+        } else {
+            return nil
+        }
+    }
     func hasNext() -> Bool {
         return feof(fp) == 0
     }
@@ -35,4 +39,3 @@ class ByteReader {
         fclose(fp)
     }
 }
-

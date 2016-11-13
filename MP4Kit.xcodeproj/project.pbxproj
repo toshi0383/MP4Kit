@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1F1C92661DD8AFF900B6C03F /* ftyp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F1C92641DD8AF5E00B6C03F /* ftyp */; };
-		OBJ_25 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Box.swift */; };
-		OBJ_26 /* ByteReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* ByteReader.swift */; };
-		OBJ_27 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Decoder.swift */; };
-		OBJ_28 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Extensions.swift */; };
+		1F1C926C1DD8B2D400B6C03F /* FileTypeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C926B1DD8B2D400B6C03F /* FileTypeBox.swift */; };
+		1F1C92711DD8B2E600B6C03F /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C926D1DD8B2E600B6C03F /* Box.swift */; };
+		1F1C92721DD8B2E600B6C03F /* ByteReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C926E1DD8B2E600B6C03F /* ByteReader.swift */; };
+		1F1C92731DD8B2E600B6C03F /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C926F1DD8B2E600B6C03F /* Decoder.swift */; };
+		1F1C92741DD8B2E600B6C03F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92701DD8B2E600B6C03F /* Extensions.swift */; };
+		1F1C92761DD8B32C00B6C03F /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92751DD8B32C00B6C03F /* Error.swift */; };
+		1F1C92781DD8B75800B6C03F /* MP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92771DD8B75800B6C03F /* MP4.swift */; };
+		1F1C927A1DD8B79C00B6C03F /* MP4Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92791DD8B79C00B6C03F /* MP4Parser.swift */; };
 		OBJ_35 /* MP4KitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MP4KitTests.swift */; };
 		OBJ_37 /* MP4Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MP4Kit.framework */; };
 /* End PBXBuildFile section */
@@ -41,14 +45,18 @@
 
 /* Begin PBXFileReference section */
 		1F1C92641DD8AF5E00B6C03F /* ftyp */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftyp; sourceTree = "<group>"; };
-		OBJ_10 /* ByteReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteReader.swift; sourceTree = "<group>"; };
-		OBJ_11 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
-		OBJ_12 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1F1C926B1DD8B2D400B6C03F /* FileTypeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTypeBox.swift; sourceTree = "<group>"; };
+		1F1C926D1DD8B2E600B6C03F /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		1F1C926E1DD8B2E600B6C03F /* ByteReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteReader.swift; sourceTree = "<group>"; };
+		1F1C926F1DD8B2E600B6C03F /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		1F1C92701DD8B2E600B6C03F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1F1C92751DD8B32C00B6C03F /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		1F1C92771DD8B75800B6C03F /* MP4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4.swift; sourceTree = "<group>"; };
+		1F1C92791DD8B79C00B6C03F /* MP4Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4Parser.swift; sourceTree = "<group>"; };
 		OBJ_15 /* MP4KitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP4KitTests.swift; sourceTree = "<group>"; };
 		OBJ_18 /* MP4Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MP4Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_19 /* MP4KitTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = MP4KitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_19 /* MP4KitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MP4KitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +84,30 @@
 				1F1C92641DD8AF5E00B6C03F /* ftyp */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1F1C92671DD8B2C800B6C03F /* Box */ = {
+			isa = PBXGroup;
+			children = (
+				1F1C92681DD8B2C800B6C03F /* iso14496 */,
+			);
+			path = Box;
+			sourceTree = "<group>";
+		};
+		1F1C92681DD8B2C800B6C03F /* iso14496 */ = {
+			isa = PBXGroup;
+			children = (
+				1F1C92691DD8B2C800B6C03F /* part12 */,
+			);
+			path = iso14496;
+			sourceTree = "<group>";
+		};
+		1F1C92691DD8B2C800B6C03F /* part12 */ = {
+			isa = PBXGroup;
+			children = (
+				1F1C926B1DD8B2D400B6C03F /* FileTypeBox.swift */,
+			);
+			path = part12;
 			sourceTree = "<group>";
 		};
 		OBJ_13 /* Tests */ = {
@@ -108,10 +140,10 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				OBJ_17 /* Products */,
+				1F1C92631DD8AF5E00B6C03F /* Resources */,
 				OBJ_7 /* Sources */,
 				OBJ_13 /* Tests */,
-				1F1C92631DD8AF5E00B6C03F /* Resources */,
-				OBJ_17 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -119,22 +151,17 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* MP4Kit */,
+				1F1C926D1DD8B2E600B6C03F /* Box.swift */,
+				1F1C926E1DD8B2E600B6C03F /* ByteReader.swift */,
+				1F1C926F1DD8B2E600B6C03F /* Decoder.swift */,
+				1F1C92751DD8B32C00B6C03F /* Error.swift */,
+				1F1C92701DD8B2E600B6C03F /* Extensions.swift */,
+				1F1C92771DD8B75800B6C03F /* MP4.swift */,
+				1F1C92791DD8B79C00B6C03F /* MP4Parser.swift */,
+				1F1C92671DD8B2C800B6C03F /* Box */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
-		};
-		OBJ_8 /* MP4Kit */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_9 /* Box.swift */,
-				OBJ_10 /* ByteReader.swift */,
-				OBJ_11 /* Decoder.swift */,
-				OBJ_12 /* Extensions.swift */,
-			);
-			name = MP4Kit;
-			path = Sources;
-			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -180,6 +207,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				ORGANIZATIONNAME = "Toshihiro Suzuki";
+				TargetAttributes = {
+					OBJ_20 = {
+						LastSwiftMigration = 0810;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "MP4Kit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -204,10 +237,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_25 /* Box.swift in Sources */,
-				OBJ_26 /* ByteReader.swift in Sources */,
-				OBJ_27 /* Decoder.swift in Sources */,
-				OBJ_28 /* Extensions.swift in Sources */,
+				1F1C92741DD8B2E600B6C03F /* Extensions.swift in Sources */,
+				1F1C92721DD8B2E600B6C03F /* ByteReader.swift in Sources */,
+				1F1C926C1DD8B2D400B6C03F /* FileTypeBox.swift in Sources */,
+				1F1C927A1DD8B79C00B6C03F /* MP4Parser.swift in Sources */,
+				1F1C92731DD8B2E600B6C03F /* Decoder.swift in Sources */,
+				1F1C92761DD8B32C00B6C03F /* Error.swift in Sources */,
+				1F1C92711DD8B2E600B6C03F /* Box.swift in Sources */,
+				1F1C92781DD8B75800B6C03F /* MP4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +270,8 @@
 		OBJ_22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
@@ -245,6 +284,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SUPPORTED_PLATFORMS = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGET_NAME = MP4Kit;
 			};
@@ -253,6 +293,8 @@
 		OBJ_23 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
@@ -292,6 +334,7 @@
 		OBJ_32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";
@@ -309,6 +352,7 @@
 		OBJ_33 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
 				HEADER_SEARCH_PATHS = "";

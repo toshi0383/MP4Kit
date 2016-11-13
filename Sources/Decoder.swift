@@ -8,7 +8,7 @@
 
 import Foundation
 
-func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
+public func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
     return try T.decode(data)
 }
 
@@ -25,7 +25,17 @@ func decodeBoxHeader(_ data: Data) -> (UInt32, BoxType)? {
     return (size, type)
 }
 
-struct Constants {
-	static let bufferSize: Int = 36
+func extract(_ data: Data) throws -> UInt32 {
+    return data.withUnsafeBytes{$0.pointee}
 }
 
+func extract(_ bytes: [UInt8]) throws -> String {
+    return try extract(Data(bytes: bytes))
+}
+
+func extract(_ data: Data) throws -> String {
+    guard let str = String(data: data, encoding: String.Encoding.utf8) else {
+        throw BitStreamDecodeError.TypeMismatch
+    }
+    return str
+}

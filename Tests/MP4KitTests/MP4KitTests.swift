@@ -4,8 +4,12 @@ import XCTest
 class MP4KitTests: XCTestCase {
     func parse(_ filename: String) {
         do {
-            let mp4 = try MP4(path: filename)
-            XCTAssert(mp4.container.ftyp.minorVersion == 512)
+            let mp4 = try MonolithicMP4FileParser(path: filename).parse()
+            guard let container = mp4.container as? ISO14496Part12Container else {
+                XCTFail()
+                return
+            }
+            XCTAssert(container.ftyp.minorVersion == 512)
         } catch {
             XCTFail()
         }
@@ -19,8 +23,7 @@ class MP4KitTests: XCTestCase {
         parse(path(forResource: "ftyp"))
     }
 
-
-    static var allTests : [(String, (MP4KitTests) -> () throws -> Void)] {
+    static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
         return [
             ("testParseMp4", testParseMp4),
         ]
