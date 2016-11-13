@@ -15,12 +15,16 @@ class MP4KitTests: XCTestCase {
         }
     }
 
-    func path(forResource name: String) -> String {
-        return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)!
+    func path(forResource name: String) -> String? {
+        return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)
     }
 
     func testParseMp4() {
-        parse(path(forResource: "ftyp"))
+        guard let path = path(forResource: "ftyp") else {
+            XCTFail("File not found.")
+            return
+        }
+        parse(path)
     }
 
     static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
