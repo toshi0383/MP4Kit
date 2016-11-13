@@ -8,8 +8,15 @@
 
 import Foundation
 
+public func decodeBox<T: BitStreamDecodable>(_ bytes: [UInt8]) throws -> T {
+    return try T.decode(bytes)
+}
+
 public func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
-    return try T.decode(data)
+    let array = data.withUnsafeBytes {
+        [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
+    }
+    return try T.decode(array)
 }
 
 func decodeBoxHeader(_ data: Data) -> (UInt32, BoxType)? {

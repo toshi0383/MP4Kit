@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol BitStreamDecodable {
-    static func decode(_ d: Data) throws -> Self
+    static func decode(_ d: [UInt8]) throws -> Self
 }
 
 public enum BoxType: String {

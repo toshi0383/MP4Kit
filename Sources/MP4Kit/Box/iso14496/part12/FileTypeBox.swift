@@ -22,7 +22,7 @@ public struct FileTypeBox: Box, BitStreamDecodable {
         self.minorVersion = minorVersion
         self.compatibleBrands = compatibleBrands
     }
-    public static func decode(_ d: Data) throws -> FileTypeBox {
+    public static func decode(_ d: [UInt8]) throws -> FileTypeBox {
         let brandsStr: String = try extract(d[16..<d.endIndex].map{$0})
         return FileTypeBox(
             size: d[0..<4].map{$0}.uint32Value,

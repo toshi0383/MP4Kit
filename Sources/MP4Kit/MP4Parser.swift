@@ -26,7 +26,7 @@ public class MonolithicMP4FileParser {
 
             switch boxtype {
             case .ftyp:
-                let ftyp: FileTypeBox = try decodeBox(data)
+                let ftyp: FileTypeBox = try decodeBox(data[0..<Int(size)].map{$0})
                 boxes.append(ftyp)
             }
             reader.seek(-Constants.bufferSize + Int(size))
