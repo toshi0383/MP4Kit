@@ -16,6 +16,7 @@
 		1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92841DD8C04800B6C03F /* Extensions.swift */; };
 		1F1C928D1DD8C04800B6C03F /* MP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92851DD8C04800B6C03F /* MP4.swift */; };
 		1F1C928E1DD8C04800B6C03F /* MP4Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92861DD8C04800B6C03F /* MP4Parser.swift */; };
+		1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */; };
 		OBJ_35 /* MP4KitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MP4KitTests.swift */; };
 		OBJ_37 /* MP4Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MP4Kit.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		1F1C92841DD8C04800B6C03F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F1C92851DD8C04800B6C03F /* MP4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4.swift; sourceTree = "<group>"; };
 		1F1C92861DD8C04800B6C03F /* MP4Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4Parser.swift; sourceTree = "<group>"; };
+		1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteReaderTests.swift; sourceTree = "<group>"; };
 		OBJ_15 /* MP4KitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP4KitTests.swift; sourceTree = "<group>"; };
 		OBJ_18 /* MP4Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MP4Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_19 /* MP4KitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MP4KitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_15 /* MP4KitTests.swift */,
+				1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */,
 			);
 			name = MP4KitTests;
 			path = Tests/MP4KitTests;
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */,
 				OBJ_35 /* MP4KitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
