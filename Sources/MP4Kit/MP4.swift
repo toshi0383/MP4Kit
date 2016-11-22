@@ -16,4 +16,5 @@ public struct MP4 {
 public protocol MediaContainer {}
 public struct ISO14496Part12Container: MediaContainer {
     public let ftyp: FileTypeBox
+    public let moov: MovieBox
 }

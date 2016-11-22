@@ -5,7 +5,16 @@
 //  Created by toshi0383 on 2016/11/13.
 //  Copyright © 2016 Toshihiro Suzuki. All rights reserved.
 //
+func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
+}
 
+func fromByteArray<T>(_ value: [UInt8], _: T.Type) -> T {
+    return value.withUnsafeBytes {
+        $0.baseAddress!.load(as: T.self)
+    }
+}
 extension Array where Element: UnsignedInteger {
     var uint64Value: UInt64 {
         let bigEndianValue = self.withUnsafeBufferPointer {

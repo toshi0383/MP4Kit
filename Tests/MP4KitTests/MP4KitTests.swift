@@ -1,6 +1,10 @@
 import XCTest
 @testable import MP4Kit
 
+func path(forResource name: String) -> String? {
+    return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)
+}
+
 class MP4KitTests: XCTestCase {
     func parse(_ filename: String) {
         do {
@@ -9,14 +13,49 @@ class MP4KitTests: XCTestCase {
                 XCTFail()
                 return
             }
-            XCTAssert(container.ftyp.minorVersion == 512)
-        } catch {
-            XCTFail()
-        }
-    }
+            XCTAssertEqual(container.ftyp.size, 36)
+            XCTAssertEqual(container.ftyp.type, .ftyp)
+            XCTAssert(container.ftyp.largesize == nil)
+            XCTAssert(container.ftyp.usertype == nil)
+            XCTAssertEqual(container.ftyp.majorBrand, "isom")
+            XCTAssertEqual(container.ftyp.minorVersion, 512)
+            XCTAssertEqual(container.ftyp.compatibleBrands.joined(),
+                           ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
 
-    func path(forResource name: String) -> String? {
-        return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)
+            // moov
+            let moov = container.moov
+            XCTAssertEqual(moov.size, 228961)
+            XCTAssertEqual(moov.type, .moov)
+            XCTAssert(moov.largesize == nil)
+            XCTAssert(moov.usertype == nil)
+
+            // mvhd
+            XCTAssertEqual(moov.mvhd.size, 108)
+            XCTAssertEqual(moov.mvhd.type, .mvhd)
+            XCTAssert(moov.mvhd.largesize == nil)
+            XCTAssert(moov.mvhd.usertype == nil)
+            XCTAssertEqual(moov.mvhd.creationTime, 0)
+            XCTAssertEqual(moov.mvhd.modificationTime, 0)
+            XCTAssertEqual(moov.mvhd.timescale, 1000)
+            XCTAssertEqual(moov.mvhd.duration, 596416)
+            XCTAssertEqual(moov.mvhd.rate, 1.0)
+            XCTAssertEqual(moov.mvhd.volume, 1.0)
+            XCTAssertEqual(moov.mvhd.reserved, 0)
+            XCTAssertEqual(moov.mvhd.reserved2, [0, 0])
+            XCTAssertEqual(moov.mvhd.matrix?.a, 1)
+            XCTAssertEqual(moov.mvhd.matrix?.b, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.u, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.c, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.d, 1)
+            XCTAssertEqual(moov.mvhd.matrix?.v, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.x, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.y, 0)
+            XCTAssertEqual(moov.mvhd.matrix?.w, 1)
+            XCTAssertEqual(moov.mvhd.preDefined, [0, 0, 0, 0, 0, 0])
+            XCTAssertEqual(moov.mvhd.nextTrackID, 4294967295)
+        } catch {
+            XCTFail("\(error)")
+        }
     }
 
     func testParseMp4() {
