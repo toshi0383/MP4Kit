@@ -6,12 +6,33 @@
 //  Copyright © 2016 Toshihiro Suzuki. All rights reserved.
 //
 
-extension Array {
+extension Array where Element: UnsignedInteger {
+    var uint64Value: UInt64 {
+        let bigEndianValue = self.withUnsafeBufferPointer {
+            ($0.baseAddress!.withMemoryRebound(to: UInt64.self, capacity: 1) { $0 })
+            }.pointee
+        return UInt64(bigEndian: bigEndianValue)
+    }
     var uint32Value: UInt32 {
         let bigEndianValue = self.withUnsafeBufferPointer {
             ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
             }.pointee
         return UInt32(bigEndian: bigEndianValue)
+    }
+    var uint16Value: UInt16 {
+        let bigEndianValue = self.withUnsafeBufferPointer {
+            ($0.baseAddress!.withMemoryRebound(to: UInt16.self, capacity: 1) { $0 })
+            }.pointee
+        return UInt16(bigEndian: bigEndianValue)
+    }
+    var float88Value: Float {
+        return Float(self.uint16Value) / Float(1 << 8)
+    }
+    var double1616Value: Double {
+        return Double(self.uint32Value) / Double(1 << 16)
+    }
+    var double0230Value: Double {
+        return Double(self.uint32Value / 1 << 30)
     }
 }
 
