@@ -8,27 +8,15 @@
 
 import Foundation
 
-public struct FileTypeBox: Box, BitStreamDecodable {
-    public let size: UInt32
-    public let type = BoxType.ftyp
-    public let majorBrand: String
-    public let minorVersion: UInt32
-    public let compatibleBrands: [String]
-    init(size: UInt32, majorBrand: String,
-        minorVersion: UInt32, compatibleBrands: [String])
-    {
-        self.size = size
-        self.majorBrand = majorBrand
-        self.minorVersion = minorVersion
-        self.compatibleBrands = compatibleBrands
-    }
-    public static func decode(_ d: [UInt8]) throws -> FileTypeBox {
-        let brandsStr: String = try extract(d[16..<d.endIndex].map{$0})
-        return FileTypeBox(
-            size: d[0..<4].map{$0}.uint32Value,
-            majorBrand: try extract(d[8..<12].map{$0}),
-            minorVersion: d[12..<16].map{$0}.uint32Value,
-            compatibleBrands: brandsStr.slice(4)
-        )
+public final class FileTypeBox: BoxBase {
+    public var majorBrand: String = ""
+    public var minorVersion: UInt32 = 0
+    public var compatibleBrands: [String] = []
+    required public init(_ b: ByteBuffer) throws {
+        try super.init(b)
+        self.majorBrand = try extract(b.next(4))
+        self.minorVersion = b.next(4).uint32Value
+        let brandsStr: String = try extract(b.next(b.endIndex))
+        self.compatibleBrands = brandsStr.slice(4)
     }
 }

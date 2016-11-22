@@ -9,27 +9,31 @@
 import Foundation
 
 public func decodeBox<T: BitStreamDecodable>(_ bytes: [UInt8]) throws -> T {
-    return try T.decode(bytes)
+    return try T(ByteBuffer(bytes: bytes))
 }
 
 public func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
     let array = data.withUnsafeBytes {
         [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
     }
-    return try T.decode(array)
+    return try T(ByteBuffer(bytes: array))
 }
 
-func decodeBoxHeader(_ data: Data) -> (UInt32, BoxType)? {
+func decodeBoxHeader(_ data: [UInt8]) throws -> (UInt32, BoxType?) {
     let size = data[0..<4].map{$0}.uint32Value
     guard let boxtype: String = try? extract(data[4..<8].map{$0}) else {
-        print("[decodeBoxHeader] extract was nil")
-        return nil
+        throw Error(problem: "Failed to parse string from: \(data[4..<8])")
     }
-    guard let type = BoxType(rawValue: boxtype) else {
-        print("[decodeBoxHeader] BoxType.init was nil")
-        return nil
+    return (size, BoxType(rawValue: boxtype))
+}
+
+func decodeBoxHeader(_ data: Data) throws -> (UInt32, BoxType?) {
+    let size = data[0..<4].map{$0}.uint32Value
+    guard let boxtype: String = try? extract(data[4..<8].map{$0}) else {
+        throw Error(problem: "Failed to parse string from: \(data[4..<8])")
     }
-    return (size, type)
+    print(boxtype)
+    return (size, BoxType(rawValue: boxtype))
 }
 
 func extract(_ data: Data) throws -> UInt32 {
@@ -42,7 +46,7 @@ func extract(_ bytes: [UInt8]) throws -> String {
 
 func extract(_ data: Data) throws -> String {
     guard let str = String(data: data, encoding: String.Encoding.utf8) else {
-        throw BitStreamDecodeError.TypeMismatch
+        throw Error(problem: "String parse error!: \(data)")
     }
     return str
 }
