@@ -54,11 +54,14 @@ public class MonolithicMP4FileParser {
                 break
             }
         }
+        return createMP4(boxes: boxes)
+    }
+    private func createMP4(boxes: [Box]) -> MP4 {
         return MP4(
             container: ISO14496Part12Container(
-                ftyp: boxes.flatMap{$0 as? FileTypeBox}[0],
-                moov: boxes.flatMap{$0 as? MovieBox}[0],
-                mdat: boxes.flatMap{$0 as? MediaDataBox}[0]
+                ftyp: boxes <- FileTypeBox.self,
+                moov: boxes <- MovieBox.self,
+                mdat: boxes <-? MediaDataBox.self
             )
         )
     }

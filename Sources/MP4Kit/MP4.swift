@@ -17,5 +17,5 @@ public protocol MediaContainer {}
 public struct ISO14496Part12Container: MediaContainer {
     public let ftyp: FileTypeBox
     public let moov: MovieBox
-    public let mdat: MediaDataBox
+    public let mdat: MediaDataBox?
 }
