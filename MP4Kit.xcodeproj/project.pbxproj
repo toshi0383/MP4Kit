@@ -18,6 +18,7 @@
 		1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92841DD8C04800B6C03F /* Extensions.swift */; };
 		1F1C928D1DD8C04800B6C03F /* MP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92851DD8C04800B6C03F /* MP4.swift */; };
 		1F1C928E1DD8C04800B6C03F /* MP4Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92861DD8C04800B6C03F /* MP4Parser.swift */; };
+		1F270A901DE56B8100D50536 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F270A8F1DE56B8100D50536 /* ByteBuffer.swift */; };
 		1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */; };
 		1F8C82561DE454C7008E1D59 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82551DE454C7008E1D59 /* Matrix.swift */; };
 		OBJ_35 /* MP4KitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MP4KitTests.swift */; };
@@ -59,6 +60,7 @@
 		1F1C92841DD8C04800B6C03F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F1C92851DD8C04800B6C03F /* MP4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4.swift; sourceTree = "<group>"; };
 		1F1C92861DD8C04800B6C03F /* MP4Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4Parser.swift; sourceTree = "<group>"; };
+		1F270A8F1DE56B8100D50536 /* ByteBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteBuffer.swift; sourceTree = "<group>"; };
 		1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteReaderTests.swift; sourceTree = "<group>"; };
 		1F8C82551DE454C7008E1D59 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		OBJ_15 /* MP4KitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP4KitTests.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				1F1C92801DD8C04800B6C03F /* Box.swift */,
+				1F270A8F1DE56B8100D50536 /* ByteBuffer.swift */,
 				1F1C92811DD8C04800B6C03F /* ByteReader.swift */,
 				1F1C92821DD8C04800B6C03F /* Decoder.swift */,
 				1F1C92831DD8C04800B6C03F /* Error.swift */,
@@ -257,6 +260,7 @@
 			buildActionMask = 0;
 			files = (
 				1F1C928E1DD8C04800B6C03F /* MP4Parser.swift in Sources */,
+				1F270A901DE56B8100D50536 /* ByteBuffer.swift in Sources */,
 				1F051D671DE3CBA800806590 /* MovieHeaderBox.swift in Sources */,
 				1F1C92891DD8C04800B6C03F /* ByteReader.swift in Sources */,
 				1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */,
