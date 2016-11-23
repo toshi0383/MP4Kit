@@ -2,7 +2,12 @@ import XCTest
 @testable import MP4Kit
 
 func path(forResource name: String) -> String? {
-    return Bundle(for: MP4KitTests.self).path(forResource: name, ofType: nil)
+    #if SWIFT_PACKAGE
+        return name
+    #else
+        return Bundle(for: MP4KitTests.self)
+            .path(forResource: name.components(separatedBy: "/").last!, ofType: nil)
+    #endif
 }
 
 class MP4KitTests: XCTestCase {
@@ -59,14 +64,10 @@ class MP4KitTests: XCTestCase {
     }
 
     func testParseMp4() {
-        #if SWIFT_PACKAGE
-            let path = "./Resources/ftyp"
-        #else
-            guard let path = path(forResource: "ftyp") else {
-                XCTFail("File not found.")
-                return
-            }
-        #endif
+        guard let path = path(forResource: "./Resources/ftyp") else {
+            XCTFail("File not found.")
+            return
+        }
         parse(path)
     }
 

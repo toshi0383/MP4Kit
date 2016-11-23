@@ -11,7 +11,7 @@ import XCTest
 
 class ByteReaderTests: XCTestCase {
     func testSeekAndRead() {
-        guard let path = path(forResource: "ftyp") else {
+        guard let path = path(forResource: "./Resources/ftyp") else {
             XCTFail()
             return
         }
