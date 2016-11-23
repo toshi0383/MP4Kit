@@ -98,6 +98,7 @@ class MP4KitTests: XCTestCase {
     static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
         return [
             ("testParseMp4", testParseMp4),
+            ("testParseMp4", testParseMP4Performance),
         ]
     }
 }
