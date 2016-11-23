@@ -8,16 +8,19 @@
 
 import Foundation
 
+/// ByteBuffer
+/// - Note: Marked public because this class is used as a parameter 
+///     for the initializer of public Box protocol.
 public class ByteBuffer {
 
     private let bytes: [UInt8]
     private var _position: Int = 0
 
-    public var endIndex: Int {
+    var endIndex: Int {
         return bytes.count
     }
 
-    public var position: Int {
+    var position: Int {
         get {
             return _position
         }
@@ -30,12 +33,12 @@ public class ByteBuffer {
         }
     }
 
-    public init(bytes: [UInt8]) {
+    init(bytes: [UInt8]) {
         self.bytes = bytes
     }
 
     @discardableResult
-    public func next(_ byteCount: Int) -> [UInt8] {
+    func next(_ byteCount: Int) -> [UInt8] {
         guard position != self.bytes.count else {
             return []
         }
@@ -48,7 +51,7 @@ public class ByteBuffer {
         return bytes
     }
 
-    public func seek(_ byteCount: Int) {
+    func seek(_ byteCount: Int) {
         if byteCount < 0 {
             position += byteCount
         } else {
@@ -56,7 +59,7 @@ public class ByteBuffer {
         }
     }
 
-    public func nextBoxBytes() throws -> [UInt8] {
+    func nextBoxBytes() throws -> [UInt8] {
         let (size, boxtype) = try decodeBoxHeader(next(8))
         seek(-8)
         if boxtype == nil {
@@ -66,7 +69,7 @@ public class ByteBuffer {
         }
     }
 
-    public func rewind() {
+    func rewind() {
         self.position = 0
     }
 }
