@@ -61,12 +61,12 @@ class MP4KitTests: XCTestCase {
 
             // mdat
             let mdat = container.mdat
-            XCTAssertEqual(mdat.size, 42970771)
-            XCTAssertEqual(mdat.type, .mdat)
-            XCTAssert(mdat.largesize == nil)
-            XCTAssert(mdat.usertype == nil)
-            XCTAssertEqual(mdat.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
-            XCTAssert(mdat.data.count < Constants.bufferSize)
+            XCTAssertEqual(mdat!.size, 42970771)
+            XCTAssertEqual(mdat!.type, .mdat)
+            XCTAssert(mdat!.largesize == nil)
+            XCTAssert(mdat!.usertype == nil)
+            XCTAssertEqual(mdat!.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
+            XCTAssert(mdat!.data.count < Constants.bufferSize)
             
         } catch {
             XCTFail("\(error)")

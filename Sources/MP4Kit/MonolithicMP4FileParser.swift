@@ -54,12 +54,26 @@ public class MonolithicMP4FileParser {
                 break
             }
         }
+        return createMP4(boxes: boxes)
+    }
+    private func createMP4(boxes: [Box]) -> MP4 {
         return MP4(
             container: ISO14496Part12Container(
                 ftyp: boxes.flatMap{$0 as? FileTypeBox}[0],
                 moov: boxes.flatMap{$0 as? MovieBox}[0],
-                mdat: boxes.flatMap{$0 as? MediaDataBox}[0]
+                mdat: boxes.attemptTakeFirst{$0 as? MediaDataBox}
             )
         )
+    }
+}
+
+extension Array {
+    func attemptTakeFirst<R>(f: (Element) -> (R?)) -> R? {
+        let result: [R] = self.flatMap(f)
+        if result.isEmpty {
+            return nil
+        } else {
+            return result[0]
+        }
     }
 }
