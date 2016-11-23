@@ -14,6 +14,7 @@ public protocol BitStreamDecodable {
 
 public enum BoxType: String {
     case ftyp, moov, mvhd, uuid
+    case mdat
 }
 
 public struct ByteFlags {
