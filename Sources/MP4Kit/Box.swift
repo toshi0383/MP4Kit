@@ -52,7 +52,7 @@ public class BoxBase: Box, BitStreamDecodable {
     public let usertype: [UInt8]?
     required public init(_ b: ByteBuffer) throws {
         self.size = b.next(4).uint32Value
-        let strType = try extract(b.next(4))
+        let strType = try b.next(4).stringValue()
         guard let type = BoxType(rawValue: strType) else {
             throw Error(problem: "Couldn't initialize BoxType with: \(strType)")
         }
