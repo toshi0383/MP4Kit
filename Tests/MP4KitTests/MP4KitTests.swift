@@ -66,7 +66,7 @@ class MP4KitTests: XCTestCase {
             XCTAssert(mdat.largesize == nil)
             XCTAssert(mdat.usertype == nil)
             XCTAssertEqual(mdat.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
-            XCTAssertEqual(mdat.data.count, 28)
+            XCTAssert(mdat.data.count < Constants.bufferSize)
             
         } catch {
             XCTFail("\(error)")
@@ -81,19 +81,19 @@ class MP4KitTests: XCTestCase {
         parseTest(path)
     }
 
-//    func testParseMP4Performance() {
-//        guard let path = path(forResource: "./Resources/ftyp") else {
-//            XCTFail("File not found.")
-//            return
-//        }
-//        self.measure {
-//            do {
-//                _ = try MonolithicMP4FileParser(path: path).parse()
-//            } catch {
-//                XCTFail("\(error)")
-//            }
-//        }
-//    }
+    func testParseMP4Performance() {
+        guard let path = path(forResource: "./Resources/ftyp") else {
+            XCTFail("File not found.")
+            return
+        }
+        self.measure {
+            do {
+                _ = try MonolithicMP4FileParser(path: path).parse()
+            } catch {
+                XCTFail("\(error)")
+            }
+        }
+    }
 
     static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
         return [
