@@ -24,16 +24,12 @@ func decodeBoxHeader(_ data: [UInt8]) throws -> (UInt32, BoxType?) {
     guard let boxtype: String = try? extract(data[4..<8].map{$0}) else {
         throw Error(problem: "Failed to parse string from: \(data[4..<8])")
     }
+    print(boxtype)
     return (size, BoxType(rawValue: boxtype))
 }
 
 func decodeBoxHeader(_ data: Data) throws -> (UInt32, BoxType?) {
-    let size = data[0..<4].map{$0}.uint32Value
-    guard let boxtype: String = try? extract(data[4..<8].map{$0}) else {
-        throw Error(problem: "Failed to parse string from: \(data[4..<8])")
-    }
-    print(boxtype)
-    return (size, BoxType(rawValue: boxtype))
+    return try decodeBoxHeader(data[0..<8].map{$0})
 }
 
 func extract(_ data: Data) throws -> UInt32 {
