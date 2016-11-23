@@ -15,6 +15,7 @@ public protocol BitStreamDecodable {
 public enum BoxType: String {
     case ftyp, moov, mvhd, uuid
     case mdat
+    case boxbase, fullboxbase
 }
 
 public struct ByteFlags {
@@ -31,13 +32,14 @@ public struct ByteFlags {
 }
 
 // MARK: - Box Protocols
-public protocol Box {
+public protocol Box: BitStreamDecodable {
     var size: UInt32 {get}
     var largesize: UInt64? {get}
     var type: BoxType {get}
     // `unsigned int(8)[16] usertype` is defined here in 14496-12,
     // but it should be implemented in `uuid` box independently.
     var usertype: [UInt8]? {get}
+    static func boxType() -> BoxType
 }
 
 public protocol FullBox: Box {
@@ -46,11 +48,12 @@ public protocol FullBox: Box {
 }
 
 // MARK: - Box Base Class
-public class BoxBase: Box, BitStreamDecodable {
+public class BoxBase: Box {
     public let size: UInt32 // Actual data is UInt32 unless it's defined as 'largesize'.
     public let largesize: UInt64?
     public let type: BoxType
     public let usertype: [UInt8]?
+    public class func boxType() -> BoxType { return .boxbase }
     required public init(_ b: ByteBuffer) throws {
         self.size = b.next(4).uint32Value
         let strType = try b.next(4).stringValue()
@@ -74,6 +77,7 @@ public class BoxBase: Box, BitStreamDecodable {
 public class FullBoxBase: BoxBase, FullBox {
     public var version: UInt8!
     public var flags: ByteFlags! // Actual data is bit(24)
+    public override class func boxType() -> BoxType { return .fullboxbase }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
         guard let version = b.next(1).first else {

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Decode Byte Array
 func decodeBox<T: BitStreamDecodable>(_ bytes: [UInt8]) throws -> T {
     return try T(ByteBuffer(bytes: bytes))
 }
@@ -29,4 +30,38 @@ func decodeBoxHeader(_ bytes: [UInt8]) throws -> (UInt32, BoxType?) {
 
 func decodeBoxHeader(_ data: Data) throws -> (UInt32, BoxType?) {
     return try decodeBoxHeader(data[0..<8].map{$0})
+}
+
+// MARK: - Parse IntermediateBox
+protocol _IntermediateBox {
+    var size: UInt64 {get}
+    var type: BoxType {get}
+    var bytes: [UInt8] {get}
+}
+extension IntermediateBox: _IntermediateBox {}
+
+infix operator <-
+func <-<T: _IntermediateBox, R: Box>(array: [T], type: R.Type) throws -> R {
+    return try array.parse(type: type)
+}
+infix operator <-?
+func <-?<T: _IntermediateBox, R: Box>(array: [T], type: R.Type) throws -> R? {
+    return try? array.parse(type: type)
+}
+
+extension Array where Element: _IntermediateBox {
+    fileprivate func parse<R: Box>(type: R.Type) throws -> R {
+        let decoded = try self.flatMap {
+            (box: Element) throws -> R? in
+            if box.type == R.boxType() {
+                return try? decodeBox(box.bytes)
+            } else {
+                return nil
+            }
+        }.first
+        guard let result = decoded else {
+            throw Error(problem: "Couldn't find the box of type \(type) in \(self)")
+        }
+        return result
+    }
 }
