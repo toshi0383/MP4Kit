@@ -1,0 +1,9 @@
+disabled_rules:
+  - force_try
+  - force_cast
+  - line_length
+  - opening_brace
+  - variable_name
+  - type_name
+  - statement_position
+  - function_body_length
