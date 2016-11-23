@@ -66,3 +66,18 @@ extension String {
         return arr
     }
 }
+
+infix operator <-
+func <-<T, R>(array: [T], type: R.Type) -> R {
+    return array.attemptTakeFirst(type: type)!
+}
+infix operator <-?
+func <-?<T, R>(array: [T], type: R.Type) -> R? {
+    return array.attemptTakeFirst(type: type)
+}
+
+extension Array {
+    fileprivate func attemptTakeFirst<R>(type: R.Type) -> R? {
+        return self.flatMap{$0 as? R}.first
+    }
+}
