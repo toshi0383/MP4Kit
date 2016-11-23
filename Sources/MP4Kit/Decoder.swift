@@ -8,11 +8,11 @@
 
 import Foundation
 
-public func decodeBox<T: BitStreamDecodable>(_ bytes: [UInt8]) throws -> T {
+func decodeBox<T: BitStreamDecodable>(_ bytes: [UInt8]) throws -> T {
     return try T(ByteBuffer(bytes: bytes))
 }
 
-public func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
+func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
     let array = data.withUnsafeBytes {
         [UInt8](UnsafeBufferPointer(start: $0, count: data.count))
     }
