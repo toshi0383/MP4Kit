@@ -9,9 +9,9 @@
 import Foundation
 
 public struct Error: Swift.Error {
-    let problem: String
-    let problemByteOffset: Int
-    init(problem: String, problemByteOffset: Int = 0) {
+    public let problem: String
+    public let problemByteOffset: Int
+    init(problem: String, problemByteOffset: Int = -1) {
         self.problem = problem
         self.problemByteOffset = problemByteOffset
     }
