@@ -14,9 +14,9 @@ public final class FileTypeBox: BoxBase {
     public var compatibleBrands: [String] = []
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
-        self.majorBrand = try extract(b.next(4))
+        self.majorBrand = try b.next(4).stringValue()
         self.minorVersion = b.next(4).uint32Value
-        let brandsStr: String = try extract(b.next(b.endIndex))
+        let brandsStr: String = try b.next(b.endIndex).stringValue()
         self.compatibleBrands = brandsStr.slice(4)
     }
 }

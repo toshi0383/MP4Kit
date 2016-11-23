@@ -5,17 +5,11 @@
 //  Created by toshi0383 on 2016/11/13.
 //  Copyright © 2016 Toshihiro Suzuki. All rights reserved.
 //
-func toByteArray<T>(_ value: T) -> [UInt8] {
-    var value = value
-    return withUnsafeBytes(of: &value) { Array($0) }
-}
+import Foundation
 
-func fromByteArray<T>(_ value: [UInt8], _: T.Type) -> T {
-    return value.withUnsafeBytes {
-        $0.baseAddress!.load(as: T.self)
-    }
-}
-extension Array where Element: UnsignedInteger {
+protocol _UInt8 {}
+extension UInt8: _UInt8 {}
+extension Array where Element: _UInt8 {
     var uint64Value: UInt64 {
         let bigEndianValue = self.withUnsafeBufferPointer {
             ($0.baseAddress!.withMemoryRebound(to: UInt64.self, capacity: 1) { $0 })
@@ -42,6 +36,13 @@ extension Array where Element: UnsignedInteger {
     }
     var double0230Value: Double {
         return Double(self.uint32Value / 1 << 30)
+    }
+    func stringValue() throws -> String {
+        let a = self.flatMap{$0 as? UInt8}
+        guard let str = String(bytes: a, encoding: String.Encoding.utf8) else {
+            throw Error(problem: "Failed to parse String from: \(self)")
+        }
+        return str
     }
 }
 
