@@ -17,23 +17,40 @@ public class MonolithicMP4FileParser {
     public func parse() throws -> MP4 {
         var boxes: [Box] = []
         while reader.hasNext() {
-            guard let data: Data = reader.data(size: Constants.bufferSize) else {
+            let data: Data = reader.data(size: Constants.bufferSize)
+            guard let (size, boxtypeOptional) = try? decodeBoxHeader(data) else {
                 continue
             }
-            guard let (size, boxtype) = decodeBoxHeader(data) else {
+            guard let boxtype = boxtypeOptional else {
+                reader.seek(-Constants.bufferSize+Int(size)-1)
+                reader.next(size: 1) // fseek does not make feof check enabled.
                 continue
             }
 
-            switch boxtype {
-            case .ftyp:
-                let ftyp: FileTypeBox = try decodeBox(data[0..<Int(size)].map{$0})
-                boxes.append(ftyp)
+            let boxdata: Data
+            if data.endIndex < Int(size) {
+                reader.seek(-data.endIndex)
+                boxdata = reader.data(size: Int(size))
+            } else {
+                reader.seek(-Constants.bufferSize+Int(size))
+                boxdata = data
             }
-            reader.seek(-Constants.bufferSize + Int(size))
+
+            switch boxtype {
+            case .ftyp where !boxes.contains{$0 is FileTypeBox}:
+                let ftyp: FileTypeBox = try decodeBox(boxdata[0..<Int(size)].map{$0})
+                boxes.append(ftyp)
+            case .moov where !boxes.contains{$0 is MovieBox}:
+                let moov: MovieBox = try decodeBox(boxdata[0..<Int(size)].map{$0})
+                boxes.append(moov)
+            default:
+                break
+            }
         }
         return MP4(
             container: ISO14496Part12Container(
-                ftyp: boxes.flatMap{$0 as? FileTypeBox}[0]
+                ftyp: boxes.flatMap{$0 as? FileTypeBox}[0],
+                moov: boxes.flatMap{$0 as? MovieBox}[0]
             )
         )
     }

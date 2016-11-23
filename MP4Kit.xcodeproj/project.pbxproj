@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F051D671DE3CBA800806590 /* MovieHeaderBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F051D661DE3CBA800806590 /* MovieHeaderBox.swift */; };
+		1F17CF7E1DD8DE30009C54CC /* MovieBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17CF7D1DD8DE30009C54CC /* MovieBox.swift */; };
 		1F1C92661DD8AFF900B6C03F /* ftyp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F1C92641DD8AF5E00B6C03F /* ftyp */; };
 		1F1C92871DD8C04800B6C03F /* FileTypeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C927F1DD8C04800B6C03F /* FileTypeBox.swift */; };
 		1F1C92881DD8C04800B6C03F /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92801DD8C04800B6C03F /* Box.swift */; };
@@ -16,6 +18,8 @@
 		1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92841DD8C04800B6C03F /* Extensions.swift */; };
 		1F1C928D1DD8C04800B6C03F /* MP4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92851DD8C04800B6C03F /* MP4.swift */; };
 		1F1C928E1DD8C04800B6C03F /* MP4Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1C92861DD8C04800B6C03F /* MP4Parser.swift */; };
+		1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */; };
+		1F8C82561DE454C7008E1D59 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82551DE454C7008E1D59 /* Matrix.swift */; };
 		OBJ_35 /* MP4KitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MP4KitTests.swift */; };
 		OBJ_37 /* MP4Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MP4Kit.framework */; };
 /* End PBXBuildFile section */
@@ -44,6 +48,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F051D661DE3CBA800806590 /* MovieHeaderBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieHeaderBox.swift; sourceTree = "<group>"; };
+		1F17CF7D1DD8DE30009C54CC /* MovieBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieBox.swift; sourceTree = "<group>"; };
 		1F1C92641DD8AF5E00B6C03F /* ftyp */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftyp; sourceTree = "<group>"; };
 		1F1C927F1DD8C04800B6C03F /* FileTypeBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTypeBox.swift; sourceTree = "<group>"; };
 		1F1C92801DD8C04800B6C03F /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
@@ -53,6 +59,8 @@
 		1F1C92841DD8C04800B6C03F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1F1C92851DD8C04800B6C03F /* MP4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4.swift; sourceTree = "<group>"; };
 		1F1C92861DD8C04800B6C03F /* MP4Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MP4Parser.swift; sourceTree = "<group>"; };
+		1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteReaderTests.swift; sourceTree = "<group>"; };
+		1F8C82551DE454C7008E1D59 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		OBJ_15 /* MP4KitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP4KitTests.swift; sourceTree = "<group>"; };
 		OBJ_18 /* MP4Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MP4Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_19 /* MP4KitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MP4KitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,14 +97,15 @@
 		1F1C927B1DD8C04800B6C03F /* MP4Kit */ = {
 			isa = PBXGroup;
 			children = (
-				1F1C927C1DD8C04800B6C03F /* Box */,
 				1F1C92801DD8C04800B6C03F /* Box.swift */,
 				1F1C92811DD8C04800B6C03F /* ByteReader.swift */,
 				1F1C92821DD8C04800B6C03F /* Decoder.swift */,
 				1F1C92831DD8C04800B6C03F /* Error.swift */,
 				1F1C92841DD8C04800B6C03F /* Extensions.swift */,
+				1F8C82551DE454C7008E1D59 /* Matrix.swift */,
 				1F1C92851DD8C04800B6C03F /* MP4.swift */,
 				1F1C92861DD8C04800B6C03F /* MP4Parser.swift */,
+				1F1C927C1DD8C04800B6C03F /* Box */,
 			);
 			path = MP4Kit;
 			sourceTree = "<group>";
@@ -121,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				1F1C927F1DD8C04800B6C03F /* FileTypeBox.swift */,
+				1F17CF7D1DD8DE30009C54CC /* MovieBox.swift */,
+				1F051D661DE3CBA800806590 /* MovieHeaderBox.swift */,
 			);
 			path = part12;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_15 /* MP4KitTests.swift */,
+				1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */,
 			);
 			name = MP4KitTests;
 			path = Tests/MP4KitTests;
@@ -245,12 +257,15 @@
 			buildActionMask = 0;
 			files = (
 				1F1C928E1DD8C04800B6C03F /* MP4Parser.swift in Sources */,
+				1F051D671DE3CBA800806590 /* MovieHeaderBox.swift in Sources */,
 				1F1C92891DD8C04800B6C03F /* ByteReader.swift in Sources */,
 				1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */,
 				1F1C92871DD8C04800B6C03F /* FileTypeBox.swift in Sources */,
+				1F8C82561DE454C7008E1D59 /* Matrix.swift in Sources */,
 				1F1C928A1DD8C04800B6C03F /* Decoder.swift in Sources */,
 				1F1C928B1DD8C04800B6C03F /* Error.swift in Sources */,
 				1F1C92881DD8C04800B6C03F /* Box.swift in Sources */,
+				1F17CF7E1DD8DE30009C54CC /* MovieBox.swift in Sources */,
 				1F1C928D1DD8C04800B6C03F /* MP4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */,
 				OBJ_35 /* MP4KitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

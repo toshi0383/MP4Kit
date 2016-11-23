@@ -8,6 +8,11 @@
 
 import Foundation
 
-public enum BitStreamDecodeError: Error {
-    case MissingKeyPath, TypeMismatch, Custom(String)
+public struct Error: Swift.Error {
+    let problem: String
+    let problemByteOffset: Int
+    init(problem: String, problemByteOffset: Int = 0) {
+        self.problem = problem
+        self.problemByteOffset = problemByteOffset
+    }
 }

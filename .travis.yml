@@ -3,10 +3,10 @@ script: placeholder # workaround for https://github.com/travis-ci/travis-ci/issu
 matrix:
   include:
     - script: set -o pipefail && script/cibuild | xcpretty
-      osx_image: xcode8
+      osx_image: xcode8.1
       env: JOB=Xcode8
     - script: swift test
-      osx_image: xcode8
+      osx_image: xcode8.1
       env: JOB=SPM
   exclude:
     - script: placeholder # workaround for https://github.com/travis-ci/travis-ci/issues/4681
