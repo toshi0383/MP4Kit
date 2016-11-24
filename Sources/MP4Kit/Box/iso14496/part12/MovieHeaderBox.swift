@@ -20,6 +20,7 @@ public final class MovieHeaderBox: FullBoxBase {
     public var matrix: Matrix? = nil
     public var preDefined: [UInt32] = []
     public var nextTrackID: UInt32 = 0
+    public override class func boxType() -> BoxType { return .mvhd }
 
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)

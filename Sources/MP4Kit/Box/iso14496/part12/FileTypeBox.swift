@@ -12,6 +12,7 @@ public final class FileTypeBox: BoxBase {
     public var majorBrand: String = ""
     public var minorVersion: UInt32 = 0
     public var compatibleBrands: [String] = []
+    public override class func boxType() -> BoxType { return .ftyp }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
         self.majorBrand = try b.next(4).stringValue()

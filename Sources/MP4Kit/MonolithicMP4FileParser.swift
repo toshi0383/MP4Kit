@@ -15,53 +15,22 @@ public class MonolithicMP4FileParser {
         self.reader = ByteReader(path: path)
     }
     public func parse() throws -> MP4 {
-        var boxes: [Box] = []
+        var boxes: [IntermediateBox] = []
         while reader.hasNext() {
-            let bytes = reader.next(size: Constants.bufferSize)
-            guard let (size, boxtypeOptional) = try? decodeBoxHeader(bytes) else {
+            do {
+                // Store bytes on IntermediateBox, not parsed yet.
+                // IntermediateBox knows only size(UInt64) and type(BoxType).
+                boxes.append(try IntermediateBox(bytes: try reader.nextBox{$0 == .mdat}))
+            } catch {
                 continue
-            }
-            guard let boxtype = boxtypeOptional else {
-                reader.seek(-Constants.bufferSize+Int(size)-1)
-                reader.next(size: 1) // fseek does not make feof check enabled.
-                continue
-            }
-            if boxtype == .mdat {
-                reader.seek(-Constants.bufferSize)
-                let buf = ByteBuffer(bytes: bytes)
-                boxes.append(try MediaDataBox(buf))
-                reader.seek(-Constants.bufferSize+Int(size)) // skip data part
-                continue
-            }
-
-            let boxbytes: [UInt8]
-            if bytes.endIndex < Int(size) {
-                reader.seek(-bytes.endIndex)
-                boxbytes = reader.next(size: Int(size))
-            } else {
-                reader.seek(-Constants.bufferSize+Int(size))
-                boxbytes = bytes
-            }
-
-            switch boxtype {
-            case .ftyp where !boxes.contains{$0 is FileTypeBox}:
-                let ftyp: FileTypeBox = try decodeBox(boxbytes[0..<Int(size)].map{$0})
-                boxes.append(ftyp)
-            case .moov where !boxes.contains{$0 is MovieBox}:
-                let moov: MovieBox = try decodeBox(boxbytes[0..<Int(size)].map{$0})
-                boxes.append(moov)
-            default:
-                break
             }
         }
-        return createMP4(boxes: boxes)
-    }
-    private func createMP4(boxes: [Box]) -> MP4 {
         return MP4(
             container: ISO14496Part12Container(
-                ftyp: boxes <- FileTypeBox.self,
-                moov: boxes <- MovieBox.self,
-                mdat: boxes <-? MediaDataBox.self
+                // Here <- and <-? operators finally does parsing.
+                ftyp: try boxes <- FileTypeBox.self,
+                moov: try boxes <- MovieBox.self,
+                mdat: try boxes <-? MediaDataBox.self
             )
         )
     }

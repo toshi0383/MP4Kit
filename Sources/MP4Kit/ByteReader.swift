@@ -39,3 +39,33 @@ class ByteReader {
         fclose(fp)
     }
 }
+
+extension ByteReader {
+    func nextBox(shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> [UInt8] {
+        let bytes = next(size: Constants.bufferSize)
+        guard let (size, boxtypeOptional) = try? decodeBoxHeader(bytes) else {
+            throw Error(problem: "Couldn't decode Box Header part.")
+        }
+        guard let boxtype = boxtypeOptional else {
+            seek(-Constants.bufferSize+Int(size)-1)
+            next(size: 1) // fseek does not make feof check enabled.
+            throw Error(problem: "Unknown Box Type.")
+        }
+        if let f = shouldSkipPayload {
+            if f(boxtype) {
+                seek(-Constants.bufferSize+Int(size)) // skip data part
+                return bytes
+            }
+        }
+
+        let boxbytes: [UInt8]
+        if bytes.endIndex < Int(size) {
+            seek(-bytes.endIndex)
+            boxbytes = next(size: Int(size))
+        } else {
+            seek(-Constants.bufferSize+Int(size))
+            boxbytes = bytes
+        }
+        return boxbytes
+    }
+}
