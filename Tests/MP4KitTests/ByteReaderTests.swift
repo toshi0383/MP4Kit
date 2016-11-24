@@ -31,4 +31,9 @@ class ByteReaderTests: XCTestCase {
         r.next(size: 1)
         XCTAssertFalse(r.hasNext())
     }
+    static var allTests: [(String, (ByteReaderTests) -> () throws -> Void)] {
+        return [
+            ("testSeekAndRead", testSeekAndRead),
+        ]
+    }
 }
