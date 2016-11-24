@@ -65,6 +65,10 @@ public class ByteBuffer {
         if boxtype == nil {
             throw Error(problem: "Couldn't find next Box.", problemByteOffset: position-8)
         } else {
+            // `size` is UInt64 here, so assuming not to load so much bytes on memory.
+            // Let's ignore if it overflows.
+            // Swift.Array.count is Int and it crashes on overflow, too.
+            // Let's put it that way for now..
             return next(Int(size))
         }
     }
