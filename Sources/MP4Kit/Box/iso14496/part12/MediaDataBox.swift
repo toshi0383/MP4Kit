@@ -16,4 +16,3 @@ public class MediaDataBox: BoxBase {
         self.data = b.next(b.endIndex-b.position)
     }
 }
-
