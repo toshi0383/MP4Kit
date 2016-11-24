@@ -4,4 +4,5 @@ import XCTest
 XCTMain([
      testCase(MP4KitTests.allTests),
      testCase(ByteReaderTests.allTests),
+     testCase(LargeSizeTests.allTests),
 ])
