@@ -20,16 +20,21 @@ func decodeBox<T: BitStreamDecodable>(_ data: Data) throws -> T {
     return try T(ByteBuffer(bytes: array))
 }
 
-func decodeBoxHeader(_ bytes: [UInt8]) throws -> (UInt32, BoxType?) {
+func decodeBoxHeader(_ bytes: [UInt8]) throws -> (UInt64, BoxType?) {
     let size = bytes[0..<4].map{$0}.uint32Value
     let boxbytes = bytes[4..<8].map{$0}
     let boxtype = try boxbytes.stringValue()
     print(boxtype)
-    return (size, BoxType(rawValue: boxtype))
+    if size == 1 {
+        let largesize = bytes[8..<16].map{$0}.uint64Value
+        return (largesize, BoxType(rawValue: boxtype))
+    } else {
+        return (UInt64(size), BoxType(rawValue: boxtype))
+    }
 }
 
-func decodeBoxHeader(_ data: Data) throws -> (UInt32, BoxType?) {
-    return try decodeBoxHeader(data[0..<8].map{$0})
+func decodeBoxHeader(_ data: Data) throws -> (UInt64, BoxType?) {
+    return try decodeBoxHeader(data[0..<16].map{$0})
 }
 
 // MARK: - Parse IntermediateBox

@@ -60,8 +60,8 @@ public class ByteBuffer {
     }
 
     func nextBoxBytes() throws -> [UInt8] {
-        let (size, boxtype) = try decodeBoxHeader(next(8))
-        seek(-8)
+        let (size, boxtype) = try decodeBoxHeader(next(16))
+        seek(-16)
         if boxtype == nil {
             throw Error(problem: "Couldn't find next Box.", problemByteOffset: position-8)
         } else {
