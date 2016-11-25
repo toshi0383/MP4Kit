@@ -1,15 +1,6 @@
 import XCTest
 @testable import MP4Kit
 
-func path(forResource name: String) -> String? {
-    #if SWIFT_PACKAGE
-        return name
-    #else
-        return Bundle(for: MP4KitTests.self)
-            .path(forResource: name.components(separatedBy: "/").last!, ofType: nil)
-    #endif
-}
-
 class MP4KitTests: XCTestCase {
     func parseTest(_ filename: String) {
         do {
@@ -96,7 +87,6 @@ class MP4KitTests: XCTestCase {
 
     func testWriteMp4() {
         let path = temporaryFilePath()
-        print(path)
         let ftyp = FileTypeBox()
         ftyp.size = 36
         ftyp.type = .ftyp
@@ -114,7 +104,6 @@ class MP4KitTests: XCTestCase {
             let url = URL(fileURLWithPath: path)
             let data = Data(bytes: bytes)
             XCTAssertEqual(try Data(contentsOf: url), data)
-            print(data.map{$0})
         } catch {
             XCTFail("\(error)")
         }

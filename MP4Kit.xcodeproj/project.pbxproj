@@ -28,6 +28,7 @@
 		1FE1CF481DE86257001D1E0B /* ByteWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */; };
 		1FE1CF4A1DE86555001D1E0B /* ByteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF491DE86555001D1E0B /* ByteWriter.swift */; };
 		1FE1CF4C1DE87AC3001D1E0B /* BitStreamEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */; };
+		1FE1CF4E1DE883B3001D1E0B /* SharedFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF4D1DE883B3001D1E0B /* SharedFunctionality.swift */; };
 		OBJ_35 /* MP4KitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* MP4KitTests.swift */; };
 		OBJ_37 /* MP4Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* MP4Kit.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteWriterTests.swift; sourceTree = "<group>"; };
 		1FE1CF491DE86555001D1E0B /* ByteWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteWriter.swift; sourceTree = "<group>"; };
 		1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitStreamEncodableTests.swift; sourceTree = "<group>"; };
+		1FE1CF4D1DE883B3001D1E0B /* SharedFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctionality.swift; sourceTree = "<group>"; };
 		OBJ_15 /* MP4KitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP4KitTests.swift; sourceTree = "<group>"; };
 		OBJ_18 /* MP4Kit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MP4Kit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_19 /* MP4KitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = MP4KitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 				1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */,
 				1F270A9B1DE6785A00D50536 /* LargeSizeTests.swift */,
 				OBJ_15 /* MP4KitTests.swift */,
+				1FE1CF4D1DE883B3001D1E0B /* SharedFunctionality.swift */,
 			);
 			name = MP4KitTests;
 			path = Tests/MP4KitTests;
@@ -307,6 +310,7 @@
 				1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */,
 				1FE1CF4C1DE87AC3001D1E0B /* BitStreamEncodableTests.swift in Sources */,
 				1F270A9C1DE6785A00D50536 /* LargeSizeTests.swift in Sources */,
+				1FE1CF4E1DE883B3001D1E0B /* SharedFunctionality.swift in Sources */,
 				OBJ_35 /* MP4KitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
