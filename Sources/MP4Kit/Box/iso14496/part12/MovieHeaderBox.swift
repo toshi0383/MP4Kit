@@ -16,7 +16,6 @@ public final class MovieHeaderBox: FullBoxBase {
     public var rate: Double? = nil
     public var volume: Float? = nil
     public var matrix: Matrix? = nil
-    public var preDefined: [UInt32] = []
     public var nextTrackID: UInt32 = 0
     public override class func boxType() -> BoxType { return .mvhd }
 
@@ -33,14 +32,7 @@ public final class MovieHeaderBox: FullBoxBase {
         b.next(2) // reserved
         b.next(4); b.next(4) // reserved
         self.matrix = try Matrix(b)
-        self.preDefined = [
-            b.next(4).uint32Value,
-            b.next(4).uint32Value,
-            b.next(4).uint32Value,
-            b.next(4).uint32Value,
-            b.next(4).uint32Value,
-            b.next(4).uint32Value,
-        ]
+        b.next(24) // predefined
         self.nextTrackID = b.next(4).uint32Value
     }
 }

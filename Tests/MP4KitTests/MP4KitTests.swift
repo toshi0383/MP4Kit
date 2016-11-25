@@ -54,7 +54,6 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(moov.mvhd.matrix?.x, 0)
             XCTAssertEqual(moov.mvhd.matrix?.y, 0)
             XCTAssertEqual(moov.mvhd.matrix?.w, 1)
-            XCTAssertEqual(moov.mvhd.preDefined, [0, 0, 0, 0, 0, 0])
             XCTAssertEqual(moov.mvhd.nextTrackID, 4294967295)
 
             // mdat
