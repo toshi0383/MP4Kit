@@ -87,7 +87,6 @@ class MP4KitTests: XCTestCase {
 
     func testWriteMp4() {
         let path = temporaryFilePath()
-        print(path)
         let ftyp = FileTypeBox()
         ftyp.size = 36
         ftyp.type = .ftyp
