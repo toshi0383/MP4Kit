@@ -45,6 +45,7 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(moov.mvhd.duration, 596416)
             XCTAssertEqual(moov.mvhd.rate, 1.0)
             XCTAssertEqual(moov.mvhd.volume, 1.0)
+            XCTAssertEqual(moov.mvhd.matrix!, Matrix.rotate0)
             XCTAssertEqual(moov.mvhd.matrix?.a, 1)
             XCTAssertEqual(moov.mvhd.matrix?.b, 0)
             XCTAssertEqual(moov.mvhd.matrix?.u, 0)
