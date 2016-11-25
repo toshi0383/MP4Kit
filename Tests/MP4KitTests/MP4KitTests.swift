@@ -93,14 +93,7 @@ class MP4KitTests: XCTestCase {
         }
     }
 
-    static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
-        return [
-            ("testParseMp4", testParseMp4),
-            ("testParseMp4Performance", testParseMP4Performance),
-        ]
-    }
-
-    func testWriteMP4() {
+    func testWriteMp4() {
         let path = temporaryFilePath()
         print(path)
         let ftyp = FileTypeBox()
@@ -144,4 +137,11 @@ class MP4KitTests: XCTestCase {
         }
     }
 
+    static var allTests: [(String, (MP4KitTests) -> () throws -> Void)] {
+        return [
+            ("testParseMp4", testParseMp4),
+            ("testParseMp4Performance", testParseMP4Performance),
+            ("testWriteMp4", testWriteMp4),
+        ]
+    }
 }

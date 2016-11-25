@@ -168,11 +168,11 @@
 		OBJ_14 /* MP4KitTests */ = {
 			isa = PBXGroup;
 			children = (
+				1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */,
 				1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */,
 				1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */,
-				OBJ_15 /* MP4KitTests.swift */,
 				1F270A9B1DE6785A00D50536 /* LargeSizeTests.swift */,
-				1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */,
+				OBJ_15 /* MP4KitTests.swift */,
 			);
 			name = MP4KitTests;
 			path = Tests/MP4KitTests;

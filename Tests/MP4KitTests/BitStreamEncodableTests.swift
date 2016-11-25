@@ -13,4 +13,9 @@ class BitStreamEncodableTests: XCTestCase {
         XCTAssertEqual(try "ftyp".encode(), [102, 116, 121, 112])
         XCTAssertEqual(try "".encode(), [0, 0, 0, 0])
     }
+    static var allTests: [(String, (BitStreamEncodableTests) -> () throws -> Void)] {
+        return [
+            ("testEncode", testEncode),
+        ]
+    }
 }
