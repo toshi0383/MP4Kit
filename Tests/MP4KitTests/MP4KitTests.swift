@@ -105,7 +105,6 @@ class MP4KitTests: XCTestCase {
             let url = URL(fileURLWithPath: path)
             let data = Data(bytes: bytes)
             XCTAssertEqual(try Data(contentsOf: url), data)
-            print(data.map{$0})
         } catch {
             XCTFail("\(error)")
         }
