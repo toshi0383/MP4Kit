@@ -11,9 +11,11 @@ import Foundation
 public final class MovieBox: BoxBase {
     public var mvhd: MovieHeaderBox!
     public override class func boxType() -> BoxType { return .moov }
+    public required init() {
+        super.init()
+    }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
-        let mvhd: MovieHeaderBox = try decodeBox(try b.nextBoxBytes())
-        self.mvhd = mvhd
+        self.mvhd = try? decodeBox(try b.nextBoxBytes())
     }
 }

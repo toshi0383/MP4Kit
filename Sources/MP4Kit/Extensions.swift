@@ -7,6 +7,7 @@
 //
 import Foundation
 
+// MARK: - Array<UInt8>
 protocol _UInt8 {}
 extension UInt8: _UInt8 {}
 extension Array where Element: _UInt8 {
@@ -46,6 +47,7 @@ extension Array where Element: _UInt8 {
     }
 }
 
+// MARK: - String
 extension String {
     func slice(_ length: Int) -> [String] {
         guard self.characters.count >= length else {
@@ -67,6 +69,7 @@ extension String {
     }
 }
 
+// MARK: - Date
 extension Date {
     init(sinceReferenceDate n: UInt64) {
         self = Date(
@@ -74,4 +77,33 @@ extension Date {
             since: Constants.referenceDate
         )
     }
+}
+
+// MARK: - UInt32
+extension UInt32: BitStreamEncodable {
+    public func encode() throws -> [UInt8] {
+        return toByteArray(self).reversed()
+    }
+}
+
+// MARK: - UInt64
+extension UInt64: BitStreamEncodable {
+    public func encode() throws -> [UInt8] {
+        return toByteArray(self).reversed()
+    }
+}
+
+// MARK: - String
+extension String: BitStreamEncodable {
+    public func encode() throws -> [UInt8] {
+        guard self.characters.count == 4 else {
+            return [0, 0, 0, 0]
+        }
+        return self.utf8.map{UInt8($0)}
+    }
+}
+
+func toByteArray<T>(_ value: T) -> [UInt8] {
+    var value = value
+    return withUnsafeBytes(of: &value) { Array($0) }
 }

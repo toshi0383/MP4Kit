@@ -11,6 +11,9 @@ import Foundation
 public class MediaDataBox: BoxBase {
     public var data: [UInt8] = []
     public override class func boxType() -> BoxType { return .mdat }
+    public required init() {
+        super.init()
+    }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
         self.data = b.next(b.endIndex-b.position)

@@ -18,13 +18,14 @@ class MP4KitTests: XCTestCase {
                 XCTFail()
                 return
             }
-            XCTAssertEqual(container.ftyp.size, 36)
-            XCTAssertEqual(container.ftyp.type, .ftyp)
-            XCTAssert(container.ftyp.largesize == nil)
-            XCTAssert(container.ftyp.usertype == nil)
-            XCTAssertEqual(container.ftyp.majorBrand, "isom")
-            XCTAssertEqual(container.ftyp.minorVersion, 512)
-            XCTAssertEqual(container.ftyp.compatibleBrands.joined(),
+            let ftyp = container.ftyp
+            XCTAssertEqual(ftyp.size, 36)
+            XCTAssertEqual(ftyp.type, .ftyp)
+            XCTAssert(ftyp.largesize == nil)
+            XCTAssert(ftyp.usertype == nil)
+            XCTAssertEqual(ftyp.majorBrand, "isom")
+            XCTAssertEqual(ftyp.minorVersion, 512)
+            XCTAssertEqual(ftyp.compatibleBrands.joined(),
                            ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
 
             // moov
@@ -98,4 +99,49 @@ class MP4KitTests: XCTestCase {
             ("testParseMp4Performance", testParseMP4Performance),
         ]
     }
+
+    func testWriteMP4() {
+        let path = temporaryFilePath()
+        print(path)
+        let ftyp = FileTypeBox()
+        ftyp.size = 36
+        ftyp.type = .ftyp
+        ftyp.majorBrand = "isom"
+        ftyp.minorVersion = 512
+        ftyp.compatibleBrands = ["isom", "iso2", "avc1", "mp41", "iso5"]
+        let moov = MovieBox()
+        moov.type = .moov
+        do {
+            let w = ByteWriter(path: path)
+            var bytes = try ftyp.encode()
+            bytes += try moov.encode()
+            w.write(bytes)
+            w.close()
+            let url = URL(fileURLWithPath: path)
+            let data = Data(bytes: bytes)
+            XCTAssertEqual(try Data(contentsOf: url), data)
+            print(data.map{$0})
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let mp4 = try MonolithicMP4FileParser(path: path).parse()
+            guard let container = mp4.container as? ISO14496Part12Container else {
+                XCTFail()
+                return
+            }
+            let ftyp = container.ftyp
+            XCTAssertEqual(ftyp.size, 36)
+            XCTAssertEqual(ftyp.type, .ftyp)
+            XCTAssert(ftyp.largesize == nil)
+            XCTAssert(ftyp.usertype == nil)
+            XCTAssertEqual(ftyp.majorBrand, "isom")
+            XCTAssertEqual(ftyp.minorVersion, 512)
+            XCTAssertEqual(ftyp.compatibleBrands.joined(),
+                           ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+
 }

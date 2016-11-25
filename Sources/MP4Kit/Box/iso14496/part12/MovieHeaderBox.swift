@@ -19,6 +19,9 @@ public final class MovieHeaderBox: FullBoxBase {
     public var nextTrackID: UInt32 = 0
     public override class func boxType() -> BoxType { return .mvhd }
 
+    public required init() {
+        super.init()
+    }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
         self.creationTime = Date(sinceReferenceDate: version == 1 ?

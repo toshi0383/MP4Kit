@@ -20,4 +20,14 @@ public final class FileTypeBox: BoxBase {
         let brandsStr: String = try b.next(b.endIndex).stringValue()
         self.compatibleBrands = brandsStr.slice(4)
     }
+    public required init() {
+        super.init()
+    }
+    public override func encode() throws -> [UInt8] {
+        var bytes = try super.encode()
+        bytes += try majorBrand.encode()
+        bytes += try minorVersion.encode()
+        bytes += try compatibleBrands.map{try $0.encode()}.flatMap{$0}
+        return bytes
+    }
 }
