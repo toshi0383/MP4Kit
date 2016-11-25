@@ -66,3 +66,12 @@ extension String {
         return arr
     }
 }
+
+extension Date {
+    init(sinceReferenceDate n: UInt64) {
+        self = Date(
+            timeInterval: TimeInterval(n),
+            since: Constants.referenceDate
+        )
+    }
+}

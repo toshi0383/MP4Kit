@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Constants {
+extension Constants {
     static let bufferSize: Int = 36
 }
 

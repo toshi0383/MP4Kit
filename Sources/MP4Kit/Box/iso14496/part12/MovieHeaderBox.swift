@@ -9,14 +9,12 @@
 import Foundation
 
 public final class MovieHeaderBox: FullBoxBase {
-    public var creationTime: UInt64 = 0
-    public var modificationTime: UInt64 = 0
+    public var creationTime: Date = Constants.referenceDate
+    public var modificationTime: Date = Constants.referenceDate
     public var timescale: UInt32 = 0
     public var duration: UInt64 = 0
     public var rate: Double? = nil
     public var volume: Float? = nil
-    public var reserved: UInt16 = 0
-    public var reserved2: [UInt32] = []
     public var matrix: Matrix? = nil
     public var preDefined: [UInt32] = []
     public var nextTrackID: UInt32 = 0
@@ -24,14 +22,16 @@ public final class MovieHeaderBox: FullBoxBase {
 
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
-        self.creationTime = version == 1 ? b.next(8).uint64Value : UInt64(b.next(4).uint32Value)
-        self.modificationTime = version == 1 ? b.next(8).uint64Value : UInt64(b.next(4).uint32Value)
+        self.creationTime = Date(sinceReferenceDate: version == 1 ?
+            b.next(8).uint64Value : UInt64(b.next(4).uint32Value))
+        self.modificationTime = Date(sinceReferenceDate: version == 1 ?
+            b.next(8).uint64Value : UInt64(b.next(4).uint32Value))
         self.timescale = b.next(4).uint32Value
         self.duration = version == 1 ? b.next(8).uint64Value : UInt64(b.next(4).uint32Value)
         self.rate = b.next(4).double1616Value
         self.volume = b.next(2).float88Value
-        self.reserved = b.next(2).uint16Value
-        self.reserved2 = [b.next(4).uint32Value, b.next(4).uint32Value]
+        b.next(2) // reserved
+        b.next(4); b.next(4) // reserved
         self.matrix = try Matrix(b)
         self.preDefined = [
             b.next(4).uint32Value,

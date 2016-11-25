@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F032C8E1DE8574D00A2DBFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F032C8D1DE8574D00A2DBFB /* Constants.swift */; };
 		1F051D671DE3CBA800806590 /* MovieHeaderBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F051D661DE3CBA800806590 /* MovieHeaderBox.swift */; };
 		1F17CF7E1DD8DE30009C54CC /* MovieBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F17CF7D1DD8DE30009C54CC /* MovieBox.swift */; };
 		1F1C92661DD8AFF900B6C03F /* ftyp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F1C92641DD8AF5E00B6C03F /* ftyp */; };
@@ -52,6 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F032C8D1DE8574D00A2DBFB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1F051D661DE3CBA800806590 /* MovieHeaderBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieHeaderBox.swift; sourceTree = "<group>"; };
 		1F17CF7D1DD8DE30009C54CC /* MovieBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieBox.swift; sourceTree = "<group>"; };
 		1F1C92641DD8AF5E00B6C03F /* ftyp */ = {isa = PBXFileReference; lastKnownFileType = file; path = ftyp; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				1F1C92801DD8C04800B6C03F /* Box.swift */,
 				1F270A8F1DE56B8100D50536 /* ByteBuffer.swift */,
 				1F1C92811DD8C04800B6C03F /* ByteReader.swift */,
+				1F032C8D1DE8574D00A2DBFB /* Constants.swift */,
 				1F1C92821DD8C04800B6C03F /* Decoder.swift */,
 				1F1C92831DD8C04800B6C03F /* Error.swift */,
 				1F1C92841DD8C04800B6C03F /* Extensions.swift */,
@@ -273,6 +276,7 @@
 				1F051D671DE3CBA800806590 /* MovieHeaderBox.swift in Sources */,
 				1F1C92891DD8C04800B6C03F /* ByteReader.swift in Sources */,
 				1F270A941DE570E900D50536 /* MediaDataBox.swift in Sources */,
+				1F032C8E1DE8574D00A2DBFB /* Constants.swift in Sources */,
 				1F1C928C1DD8C04800B6C03F /* Extensions.swift in Sources */,
 				1F1C92871DD8C04800B6C03F /* FileTypeBox.swift in Sources */,
 				1F8C82561DE454C7008E1D59 /* Matrix.swift in Sources */,
