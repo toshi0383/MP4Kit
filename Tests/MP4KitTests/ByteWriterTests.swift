@@ -10,13 +10,6 @@ import XCTest
 import Foundation
 @testable import MP4Kit
 
-private var tmpCounter = 0
-func temporaryFilePath() -> String {
-    let url = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-    tmpCounter += 1
-    return url.appendingPathComponent("tmp\(tmpCounter)").path
-}
-
 class ByteWriterTests: XCTestCase {
 
     func testByteWriter() {

@@ -1,15 +1,6 @@
 import XCTest
 @testable import MP4Kit
 
-func path(forResource name: String) -> String? {
-    #if SWIFT_PACKAGE
-        return name
-    #else
-        return Bundle(for: MP4KitTests.self)
-            .path(forResource: name.components(separatedBy: "/").last!, ofType: nil)
-    #endif
-}
-
 class MP4KitTests: XCTestCase {
     func parseTest(_ filename: String) {
         do {
