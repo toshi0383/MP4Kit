@@ -10,12 +10,26 @@ import Foundation
 
 public final class MovieBox: BoxBase {
     public var mvhd: MovieHeaderBox!
+    public var traks: [TrackBox] = []
     public override class func boxType() -> BoxType { return .moov }
     public required init() {
         super.init()
     }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
-        self.mvhd = try? decodeBox(try b.nextBoxBytes())
+        var boxes: [IntermediateBox] = []
+        while b.hasNext() {
+            do {
+                // Store bytes on IntermediateBox, not parsed yet.
+                // IntermediateBox knows only size(UInt64) and type(BoxType).
+                boxes.append(try IntermediateBox(bytes: try b.nextBoxBytes()))
+            } catch {
+                break
+            }
+        }
+        let trakBoxes = boxes.filter{$0.type == .trak}
+
+        self.mvhd = try boxes <- MovieHeaderBox.self
+        self.traks = try trakBoxes <-| TrackBox.self
     }
 }

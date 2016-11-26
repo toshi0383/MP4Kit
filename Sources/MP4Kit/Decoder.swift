@@ -47,15 +47,19 @@ extension IntermediateBox: _IntermediateBox {}
 
 infix operator <-
 func <-<T: _IntermediateBox, R: Box>(array: [T], type: R.Type) throws -> R {
-    return try array.parse(type: type)
+    return (try array.parse(type: type)).first!
 }
 infix operator <-?
 func <-?<T: _IntermediateBox, R: Box>(array: [T], type: R.Type) throws -> R? {
-    return try? array.parse(type: type)
+    return (try? array.parse(type: type))?.first
+}
+infix operator <-|
+func <-|<T: _IntermediateBox, R: Box>(array: [T], type: R.Type) throws -> [R] {
+    return try array.parse(type: type)
 }
 
 extension Array where Element: _IntermediateBox {
-    fileprivate func parse<R: Box>(type: R.Type) throws -> R {
+    fileprivate func parse<R: Box>(type: R.Type) throws -> [R] {
         let decoded = try self.flatMap {
             (box: Element) throws -> R? in
             if box.type == R.boxType() {
@@ -63,10 +67,10 @@ extension Array where Element: _IntermediateBox {
             } else {
                 return nil
             }
-        }.first
-        guard let result = decoded else {
+        }
+        guard decoded.count > 0 else {
             throw Error(problem: "Couldn't find the box of type \(type) in \(self)")
         }
-        return result
+        return decoded
     }
 }

@@ -67,6 +67,11 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(mdat!.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
             XCTAssert(mdat!.data.count < Constants.bufferSize)
 
+            // trak
+            let trak = moov.traks[0]
+            let tkhd = trak.tkhd!
+            XCTAssertEqual(tkhd.size, 92)
+
         } catch {
             XCTFail("\(error)")
         }
