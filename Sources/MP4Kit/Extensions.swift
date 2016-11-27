@@ -69,6 +69,25 @@ extension String {
     }
 }
 
+// MARK: - Array
+extension Array {
+    func slice(_ length: Int) -> [[Element]] {
+        var result = [[Element]]()
+        var tmp = [Element]()
+        for (i, c) in self.enumerated() {
+            tmp.append(c)
+            if tmp.count == length {
+                result.append(tmp)
+                tmp.removeAll()
+            }
+            else if i == self.count - 1, tmp.count > 0 {
+                result.append(tmp)
+            }
+        }
+        return result
+    }
+}
+
 // MARK: - Double
 extension Double {
     func double1616ToUInt32() -> UInt32 {
@@ -152,4 +171,42 @@ extension String: BitStreamEncodable {
 func toByteArray<T>(_ value: T) -> [UInt8] {
     var value = value
     return withUnsafeBytes(of: &value) { Array($0) }
+}
+
+// MARK: BitSet
+extension BitSet: BitStreamEncodable {
+    public func encode() throws -> [UInt8] {
+        let arr: [[Bool]] = (0..<size).map{self[$0]}.slice(8)
+        var result: [UInt8] = []
+        for bit8Arr in arr {
+            var byte: Int = 0
+            byte += bit8Arr[0] ? 1 << 7 : 0
+            byte += bit8Arr[1] ? 1 << 6 : 0
+            byte += bit8Arr[2] ? 1 << 5 : 0
+            byte += bit8Arr[3] ? 1 << 4 : 0
+            byte += bit8Arr[4] ? 1 << 3 : 0
+            byte += bit8Arr[5] ? 1 << 2 : 0
+            byte += bit8Arr[6] ? 1 << 1 : 0
+            byte += bit8Arr[7] ? 1 : 0
+            result.append(UInt8(byte))
+        }
+        return result
+    }
+}
+
+// MARK: - BitSet
+extension BitSet {
+    init(bytes: [UInt8]) {
+        self.init(size: bytes.count * 8)
+        for (index, byte) in bytes.enumerated() {
+            self[index*8+0] = (byte & 1 << 7) == 1 << 7
+            self[index*8+1] = (byte & 1 << 6) == 1 << 6
+            self[index*8+2] = (byte & 1 << 5) == 1 << 5
+            self[index*8+3] = (byte & 1 << 4) == 1 << 4
+            self[index*8+4] = (byte & 1 << 3) == 1 << 3
+            self[index*8+5] = (byte & 1 << 2) == 1 << 2
+            self[index*8+6] = (byte & 1 << 1) == 1 << 1
+            self[index*8+7] = (byte & 1) == 1
+        }
+    }
 }
