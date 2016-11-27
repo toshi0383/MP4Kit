@@ -77,6 +77,17 @@ extension Date {
             since: Constants.referenceDate
         )
     }
+    // swiftlint:disable:next function_parameter_count
+    static func utc
+        (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int)
+        -> Date {
+        let cal = Calendar(identifier: .gregorian)
+        let c = DateComponents(calendar: cal,
+            timeZone: TimeZone(abbreviation: "UTC"),
+            year: year, month: month, day: day, hour: hour, minute: minute, second: second
+        )
+        return c.date!
+    }
 }
 
 // MARK: - UInt32

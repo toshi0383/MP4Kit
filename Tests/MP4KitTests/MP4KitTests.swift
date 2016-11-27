@@ -69,7 +69,27 @@ class MP4KitTests: XCTestCase {
 
             // trak
             let trak = moov.traks[0]
+            XCTAssertEqual(trak.size, 83639)
+
             let tkhd = trak.tkhd!
+            XCTAssertEqual(tkhd.creationTime, Constants.referenceDate)
+            let date = Date.utc(
+                year: 2016, month: 7, day: 21, hour: 6, minute: 10, second: 36
+            )
+            XCTAssertEqual(tkhd.modificationTime, date)
+            XCTAssertEqual(tkhd.trackID, 1)
+            XCTAssertEqual(tkhd.duration, 596416)
+            XCTAssertEqual(tkhd.layer!, 0)
+            XCTAssertEqual(tkhd.volume, 0.0)
+            XCTAssertEqual(tkhd.matrix!, Matrix.rotate0)
+            XCTAssertEqual(tkhd.matrix?.a, 1)
+            XCTAssertEqual(tkhd.matrix?.b, 0)
+            XCTAssertEqual(tkhd.matrix?.u, 0)
+            XCTAssertEqual(tkhd.matrix?.c, 0)
+            XCTAssertEqual(tkhd.matrix?.d, 1)
+            XCTAssertEqual(tkhd.matrix?.v, 0)
+            XCTAssertEqual(tkhd.matrix?.x, 0)
+            XCTAssertEqual(tkhd.matrix?.y, 0)
             XCTAssertEqual(tkhd.size, 92)
 
         } catch {
