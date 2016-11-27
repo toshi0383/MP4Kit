@@ -12,7 +12,7 @@ import XCTest
 class MovieHeaderBoxTests: XCTestCase {
 
     func testEncodeDecode() {
-        XCTAssertEqual(try! UInt32(1).encode(), [0, 0, 0, 1])
+        XCTAssertEqual(try! UInt32(1).bytes(), [0, 0, 0, 1])
         let mvhd = MovieHeaderBox()
         mvhd.size = 108
         mvhd.type = .mvhd
@@ -26,8 +26,8 @@ class MovieHeaderBoxTests: XCTestCase {
         mvhd.matrix = .rotate0
         mvhd.nextTrackID = 64
         do {
-            let bytes = try mvhd.encode()
-            let result = try MovieHeaderBox(ByteBuffer(bytes: bytes)).encode()
+            let bytes = try mvhd.bytes()
+            let result = try MovieHeaderBox(ByteBuffer(bytes: bytes)).bytes()
             XCTAssertEqual(bytes, result)
         } catch {
             XCTFail("\(error)")

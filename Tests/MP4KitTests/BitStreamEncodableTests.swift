@@ -1,5 +1,5 @@
 //
-//  BitStreamEncodableTests.swift
+//  BitStreamRepresentableTests.swift
 //  MP4Kit
 //
 //  Created by toshi0383 on 2016/11/25.
@@ -8,14 +8,14 @@
 
 import XCTest
 
-class BitStreamEncodableTests: XCTestCase {
-    func testEncode() {
-        XCTAssertEqual(try "ftyp".encode(), [102, 116, 121, 112])
-        XCTAssertEqual(try "".encode(), [0, 0, 0, 0])
+class BitStreamRepresentableTests: XCTestCase {
+    func testBytes() {
+        XCTAssertEqual(try "ftyp".bytes(), [102, 116, 121, 112])
+        XCTAssertEqual(try "".bytes(), [0, 0, 0, 0])
     }
-    static var allTests: [(String, (BitStreamEncodableTests) -> () throws -> Void)] {
+    static var allTests: [(String, (BitStreamRepresentableTests) -> () throws -> Void)] {
         return [
-            ("testEncode", testEncode),
+            ("testBytes", testBytes),
         ]
     }
 }

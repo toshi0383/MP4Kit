@@ -12,29 +12,26 @@ public protocol BitStreamDecodable {
     init(_ b: ByteBuffer) throws
 }
 
-public protocol BitStreamEncodable {
-    func encode() throws -> [UInt8]
-    func reserve(_ size: Int) -> [UInt8]
+public protocol BitStreamRepresentable {
+    func bytes() throws -> [UInt8]
 }
 
-extension BitStreamEncodable {
-    public func reserve(_ size: Int) -> [UInt8] {
-        return (0..<size).map{UInt8($0)}
-    }
+func reserve(_ size: Int) -> [UInt8] {
+    return (0..<size).map{UInt8($0)}
 }
 
-public enum BoxType: String, BitStreamEncodable {
+public enum BoxType: String, BitStreamRepresentable {
     case ftyp, moov, trak
     case meta, mvhd, tkhd, uuid
     case mdat
     case boxbase, fullboxbase
-    public func encode() throws -> [UInt8] {
-        return try rawValue.encode()
+    public func bytes() throws -> [UInt8] {
+        return try rawValue.bytes()
     }
 }
 
 // MARK: - Box Protocols
-public protocol Box: BitStreamDecodable, BitStreamEncodable {
+public protocol Box: BitStreamDecodable, BitStreamRepresentable {
     var size: UInt32 {get}
     var largesize: UInt64? {get}
     var type: BoxType {get}
@@ -76,12 +73,12 @@ public class BoxBase: Box {
         }
     }
     public required init() { }
-    public func encode() throws -> [UInt8] {
+    public func bytes() throws -> [UInt8] {
         var bytes: [UInt8] = [
-            try size.encode(),
-            try type.encode()
+            try size.bytes(),
+            try type.bytes()
         ].flatMap{$0}
-        if let arr = try largesize?.encode() {
+        if let arr = try largesize?.bytes() {
             bytes += arr
         }
         if let arr = usertype {
@@ -107,10 +104,10 @@ public class FullBoxBase: BoxBase, FullBox {
     public required init() {
         super.init()
     }
-    public override func encode() throws -> [UInt8] {
-        var bytes = try super.encode()
+    public override func bytes() throws -> [UInt8] {
+        var bytes = try super.bytes()
         bytes += [version]
-        bytes += try flags.encode()
+        bytes += try flags.bytes()
         return bytes
     }
 }

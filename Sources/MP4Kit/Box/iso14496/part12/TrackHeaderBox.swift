@@ -44,37 +44,37 @@ public final class TrackHeaderBox: FullBoxBase {
         self.height = b.next(4).double1616Value
     }
 
-    public override func encode() throws -> [UInt8] {
-        var bytes = try super.encode()
+    public override func bytes() throws -> [UInt8] {
+        var bytes = try super.bytes()
         if version == 1 {
-            bytes += try creationTime.uint64Value.encode()
-            bytes += try modificationTime.uint64Value.encode()
-            bytes += try trackID.encode()
-            bytes += try duration.encode()
+            bytes += try creationTime.uint64Value.bytes()
+            bytes += try modificationTime.uint64Value.bytes()
+            bytes += try trackID.bytes()
+            bytes += try duration.bytes()
         } else {
-            bytes += try creationTime.uint32Value.encode()
-            bytes += try modificationTime.uint32Value.encode()
-            bytes += try trackID.encode()
+            bytes += try creationTime.uint32Value.bytes()
+            bytes += try modificationTime.uint32Value.bytes()
+            bytes += try trackID.bytes()
             bytes += reserve(4) // reserved
-            bytes += try UInt32(duration).encode()
+            bytes += try UInt32(duration).bytes()
         }
         bytes += reserve(4) // reserved
         bytes += reserve(4) // reserved
         if let layer = layer {
-            bytes += try layer.encode()
+            bytes += try layer.bytes()
         }
         if let alternateGroup = alternateGroup {
-            bytes += try alternateGroup.encode()
+            bytes += try alternateGroup.bytes()
         }
         if let volume = volume {
-            bytes += try volume.float88ToUInt16().encode()
+            bytes += try volume.float88ToUInt16().bytes()
         }
         bytes += reserve(2) // reserved
         if let matrix = matrix {
-            bytes += try matrix.encode()
+            bytes += try matrix.bytes()
         }
-        bytes += try width.double1616ToUInt32().encode()
-        bytes += try height.double1616ToUInt32().encode()
+        bytes += try width.double1616ToUInt32().bytes()
+        bytes += try height.double1616ToUInt32().bytes()
         return bytes
     }
 }

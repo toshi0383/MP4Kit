@@ -125,8 +125,8 @@ class MP4KitTests: XCTestCase {
         let tmppath = temporaryFilePath()
         do {
             let w = ByteWriter(path: tmppath)
-            var bytes = try ftyp.encode()
-            bytes += try moov.encode()
+            var bytes = try ftyp.bytes()
+            bytes += try moov.bytes()
             w.write(bytes)
             w.close()
             let url = URL(fileURLWithPath: tmppath)
