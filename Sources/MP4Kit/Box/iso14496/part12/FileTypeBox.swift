@@ -23,11 +23,11 @@ public final class FileTypeBox: BoxBase {
     public required init() {
         super.init()
     }
-    public override func encode() throws -> [UInt8] {
-        var bytes = try super.encode()
-        bytes += try majorBrand.encode()
-        bytes += try minorVersion.encode()
-        bytes += try compatibleBrands.map{try $0.encode()}.flatMap{$0}
+    public override func bytes() throws -> [UInt8] {
+        var bytes = try super.bytes()
+        bytes += try majorBrand.bytes()
+        bytes += try minorVersion.bytes()
+        bytes += try compatibleBrands.map{try $0.bytes()}.flatMap{$0}
         return bytes
     }
 }

@@ -19,9 +19,9 @@ public final class TrackBox: BoxBase {
         let tkhd: TrackHeaderBox = try decodeBox(try b.nextBoxBytes())
         self.tkhd = tkhd
     }
-    public override func encode() throws -> [UInt8] {
-        var bytes = try super.encode()
-        bytes += try tkhd.encode()
+    public override func bytes() throws -> [UInt8] {
+        var bytes = try super.bytes()
+        bytes += try tkhd.bytes()
         return bytes
     }
 }

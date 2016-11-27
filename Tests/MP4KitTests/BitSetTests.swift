@@ -22,7 +22,7 @@ class BitSetTests: XCTestCase {
         expected[6] = true
         expected[7] = true
         XCTAssertEqual(BitSet(bytes: bytes), expected)
-        XCTAssertEqual(try! BitSet(bytes: bytes).encode(), [255, 0, 0])
+        XCTAssertEqual(try! BitSet(bytes: bytes).bytes(), [255, 0, 0])
     }
     func testBitSetAllOne() {
         let bytes: [UInt8] = (0..<3).map{_ in UInt8(UINT8_MAX)}
@@ -31,7 +31,7 @@ class BitSetTests: XCTestCase {
             expected[i] = true
         }
         XCTAssertEqual(BitSet(bytes: bytes), expected)
-        XCTAssertEqual(try! BitSet(bytes: bytes).encode(), [255, 255, 255])
+        XCTAssertEqual(try! BitSet(bytes: bytes).bytes(), [255, 255, 255])
     }
     static var allTests: [(String, (BitSetTests) -> () throws -> Void)] {
         return [

@@ -136,31 +136,31 @@ extension Date {
     }
 }
 
-// MARK: - BitStreamEncodable
+// MARK: - BitStreamRepresentable
 // MARK: UInt16
-extension UInt16: BitStreamEncodable {
-    public func encode() throws -> [UInt8] {
+extension UInt16: BitStreamRepresentable {
+    public func bytes() throws -> [UInt8] {
         return toByteArray(self).reversed()
     }
 }
 
 // MARK: UInt32
-extension UInt32: BitStreamEncodable {
-    public func encode() throws -> [UInt8] {
+extension UInt32: BitStreamRepresentable {
+    public func bytes() throws -> [UInt8] {
         return toByteArray(self).reversed()
     }
 }
 
 // MARK: UInt64
-extension UInt64: BitStreamEncodable {
-    public func encode() throws -> [UInt8] {
+extension UInt64: BitStreamRepresentable {
+    public func bytes() throws -> [UInt8] {
         return toByteArray(self).reversed()
     }
 }
 
 // MARK: String
-extension String: BitStreamEncodable {
-    public func encode() throws -> [UInt8] {
+extension String: BitStreamRepresentable {
+    public func bytes() throws -> [UInt8] {
         guard self.characters.count == 4 else {
             return [0, 0, 0, 0]
         }
@@ -174,8 +174,8 @@ func toByteArray<T>(_ value: T) -> [UInt8] {
 }
 
 // MARK: BitSet
-extension BitSet: BitStreamEncodable {
-    public func encode() throws -> [UInt8] {
+extension BitSet: BitStreamRepresentable {
+    public func bytes() throws -> [UInt8] {
         let arr: [[Bool]] = (0..<size).map{self[$0]}.slice(8)
         var result: [UInt8] = []
         for bit8Arr in arr {
