@@ -43,4 +43,38 @@ public final class TrackHeaderBox: FullBoxBase {
         self.width = b.next(4).double1616Value
         self.height = b.next(4).double1616Value
     }
+
+    public override func encode() throws -> [UInt8] {
+        var bytes = try super.encode()
+        if version == 1 {
+            bytes += try creationTime.uint64Value.encode()
+            bytes += try modificationTime.uint64Value.encode()
+            bytes += try trackID.encode()
+            bytes += try duration.encode()
+        } else {
+            bytes += try creationTime.uint32Value.encode()
+            bytes += try modificationTime.uint32Value.encode()
+            bytes += try trackID.encode()
+            bytes += reserve(4) // reserved
+            bytes += try UInt32(duration).encode()
+        }
+        bytes += reserve(4) // reserved
+        bytes += reserve(4) // reserved
+        if let layer = layer {
+            bytes += try layer.encode()
+        }
+        if let alternateGroup = alternateGroup {
+            bytes += try alternateGroup.encode()
+        }
+        if let volume = volume {
+            bytes += try volume.float88ToUInt16().encode()
+        }
+        bytes += reserve(2) // reserved
+        if let matrix = matrix {
+            bytes += try matrix.encode()
+        }
+        bytes += try width.double1616ToUInt32().encode()
+        bytes += try height.double1616ToUInt32().encode()
+        return bytes
+    }
 }

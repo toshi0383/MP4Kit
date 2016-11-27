@@ -111,29 +111,32 @@ class MP4KitTests: XCTestCase {
     }
 
     func testWriteMp4() {
-        let path = temporaryFilePath()
-        let ftyp = FileTypeBox()
-        ftyp.size = 36
-        ftyp.type = .ftyp
-        ftyp.majorBrand = "isom"
-        ftyp.minorVersion = 512
-        ftyp.compatibleBrands = ["isom", "iso2", "avc1", "mp41", "iso5"]
-        let moov = MovieBox()
-        moov.type = .moov
+        guard let path = path(forResource: "./Resources/ftyp") else {
+            XCTFail("File not found.")
+            return
+        }
+        let mp4 = try! MonolithicMP4FileParser(path: path).parse()
+        guard let container = mp4.container as? ISO14496Part12Container else {
+            XCTFail()
+            return
+        }
+        let ftyp = container.ftyp
+        let moov = container.moov
+        let tmppath = temporaryFilePath()
         do {
-            let w = ByteWriter(path: path)
+            let w = ByteWriter(path: tmppath)
             var bytes = try ftyp.encode()
             bytes += try moov.encode()
             w.write(bytes)
             w.close()
-            let url = URL(fileURLWithPath: path)
+            let url = URL(fileURLWithPath: tmppath)
             let data = Data(bytes: bytes)
             XCTAssertEqual(try Data(contentsOf: url), data)
         } catch {
             XCTFail("\(error)")
         }
         do {
-            let mp4 = try MonolithicMP4FileParser(path: path).parse()
+            let mp4 = try MonolithicMP4FileParser(path: tmppath).parse()
             guard let container = mp4.container as? ISO14496Part12Container else {
                 XCTFail()
                 return

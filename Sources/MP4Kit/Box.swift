@@ -14,6 +14,13 @@ public protocol BitStreamDecodable {
 
 public protocol BitStreamEncodable {
     func encode() throws -> [UInt8]
+    func reserve(_ size: Int) -> [UInt8]
+}
+
+extension BitStreamEncodable {
+    public func reserve(_ size: Int) -> [UInt8] {
+        return (0..<size).map{UInt8($0)}
+    }
 }
 
 public enum BoxType: String, BitStreamEncodable {
@@ -23,30 +30,6 @@ public enum BoxType: String, BitStreamEncodable {
     case boxbase, fullboxbase
     public func encode() throws -> [UInt8] {
         return try rawValue.encode()
-    }
-}
-
-public class ByteFlags: BitStreamEncodable {
-    // swiftlint:disable:next force_try
-    public static let allZeros = try! ByteFlags(bytes: [0, 0, 0])
-    public let value: [Bool]
-    required public convenience init(_ b: ByteBuffer) throws {
-        try self.init(bytes: b.next(3))
-    }
-    init(bytes: [UInt8]) throws {
-        guard bytes.count == 3 else { // Assume 24 bit
-            throw Error(problem: "Couldn't initialize ByteFlags from: \(bytes)")
-        }
-        self.value = bytes.map{String.init($0, radix: 2)}
-            .joined()
-            .characters
-            .map{$0 == "1"}
-    }
-    public func encode() throws -> [UInt8] {
-        return value.map{$0 ? "1" : "0"}
-            .joined()
-            .slice(8)
-            .flatMap{UInt8($0, radix: 2)}
     }
 }
 
@@ -64,7 +47,7 @@ public protocol Box: BitStreamDecodable, BitStreamEncodable {
 
 public protocol FullBox: Box {
     var version: UInt8 {get set}
-    var flags: ByteFlags {get set}
+    var flags: BitSet {get set}
 }
 
 // MARK: - Box Base Class
@@ -110,7 +93,7 @@ public class BoxBase: Box {
 
 public class FullBoxBase: BoxBase, FullBox {
     public var version: UInt8 = 0
-    public var flags: ByteFlags = .allZeros // Actual data is bit(24)
+    public var flags: BitSet = BitSet(size: 24)
     public override class func boxType() -> BoxType { return .fullboxbase }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
@@ -118,7 +101,7 @@ public class FullBoxBase: BoxBase, FullBox {
             throw Error(problem: "Couldn't parse \(self.type.rawValue).version")
         }
         self.version = version
-        self.flags = try ByteFlags(b)
+        self.flags = BitSet(bytes: b.next(3))
     }
 
     public required init() {

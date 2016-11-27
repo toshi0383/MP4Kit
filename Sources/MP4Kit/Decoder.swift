@@ -69,7 +69,7 @@ extension Array where Element: _IntermediateBox {
             }
         }
         guard decoded.count > 0 else {
-            throw Error(problem: "Couldn't find the box of type \(type) in \(self)")
+            throw Error(problem: "Couldn't find any \(R.boxType()) box in \(self)")
         }
         return decoded
     }

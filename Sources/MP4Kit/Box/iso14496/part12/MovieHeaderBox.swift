@@ -38,4 +38,33 @@ public final class MovieHeaderBox: FullBoxBase {
         b.next(24) // predefined
         self.nextTrackID = b.next(4).uint32Value
     }
+    public override func encode() throws -> [UInt8] {
+        var bytes = try super.encode()
+        if version == 1 {
+            bytes += try creationTime.uint64Value.encode()
+            bytes += try modificationTime.uint64Value.encode()
+            bytes += try timescale.encode()
+            bytes += try duration.encode()
+        } else {
+            bytes += try creationTime.uint32Value.encode()
+            bytes += try modificationTime.uint32Value.encode()
+            bytes += try timescale.encode()
+            bytes += try UInt32(duration).encode()
+        }
+        if let rate = rate {
+            bytes += try rate.double1616ToUInt32().encode()
+        }
+        if let volume = volume {
+            bytes += try volume.float88ToUInt16().encode()
+        }
+        bytes += reserve(2) // reserved
+        bytes += reserve(4) // reserved
+        bytes += reserve(4) // reserved
+        if let matrix = matrix {
+            bytes += try matrix.encode()
+        }
+        bytes += reserve(24) // predefined
+        bytes += try nextTrackID.encode()
+        return bytes
+    }
 }

@@ -17,7 +17,10 @@ final class IntermediateBox {
         guard let (size, type) = try? decodeBoxHeader(bytes) else {
             throw Error(problem: "Couldn't parse size or type.")
         }
+        guard let t = type else {
+            throw Error(problem: "Unknown box type in \(type(of: self)).")
+        }
         self.size = UInt64(size)
-        self.type = type!
+        self.type = t
     }
 }

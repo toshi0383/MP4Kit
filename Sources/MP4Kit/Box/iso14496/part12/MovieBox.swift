@@ -32,4 +32,10 @@ public final class MovieBox: BoxBase {
         self.mvhd = try boxes <- MovieHeaderBox.self
         self.traks = try trakBoxes <-| TrackBox.self
     }
+    public override func encode() throws -> [UInt8] {
+        var bytes = try super.encode()
+        bytes += try mvhd.encode()
+        bytes += try traks.map{try $0.encode()}.flatMap{$0}
+        return bytes
+    }
 }
