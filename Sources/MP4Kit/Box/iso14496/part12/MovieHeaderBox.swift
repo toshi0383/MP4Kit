@@ -55,7 +55,7 @@ public final class MovieHeaderBox: FullBoxBase {
             bytes += try rate.double1616ToUInt32().encode()
         }
         if let volume = volume {
-            bytes += try volume.float88ToUInt32().encode()
+            bytes += try volume.float88ToUInt16().encode()
         }
         bytes += reserve(2) // reserved
         bytes += reserve(4) // reserved

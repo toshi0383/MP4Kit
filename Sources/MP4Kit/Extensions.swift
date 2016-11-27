@@ -100,8 +100,8 @@ extension Double {
 
 // MARK: - Float
 extension Float {
-    func float88ToUInt32() -> UInt32 {
-        return UInt32(self * Float(1 << 8))
+    func float88ToUInt16() -> UInt16 {
+        return UInt16(self * Float(1 << 8))
     }
 }
 

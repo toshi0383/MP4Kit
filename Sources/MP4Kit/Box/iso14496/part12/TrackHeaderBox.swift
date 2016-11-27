@@ -67,7 +67,7 @@ public final class TrackHeaderBox: FullBoxBase {
             bytes += try alternateGroup.encode()
         }
         if let volume = volume {
-            bytes += try volume.float88ToUInt32().encode()
+            bytes += try volume.float88ToUInt16().encode()
         }
         bytes += reserve(2) // reserved
         if let matrix = matrix {
