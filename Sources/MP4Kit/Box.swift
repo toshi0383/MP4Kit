@@ -14,6 +14,13 @@ public protocol BitStreamDecodable {
 
 public protocol BitStreamEncodable {
     func encode() throws -> [UInt8]
+    func reserve(_ size: Int) -> [UInt8]
+}
+
+extension BitStreamEncodable {
+    public func reserve(_ size: Int) -> [UInt8] {
+        return (0..<size).map{UInt8($0)}
+    }
 }
 
 public enum BoxType: String, BitStreamEncodable {
