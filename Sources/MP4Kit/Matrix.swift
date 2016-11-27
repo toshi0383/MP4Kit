@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Matrix: BitStreamDecodable {
+public class Matrix: BitStreamDecodable, BitStreamEncodable {
     public static let rotate0   = Matrix(a: 1, b: 0, c: 0, d: 1, u: 0, v: 0, w: 1, x: 0, y: 0)
     public static let rotate90  = Matrix(a: 0, b: 1, c: -1, d: 0, u: 0, v: 0, w: 1, x: 0, y: 0)
     public static let rotate180 = Matrix(a: -1, b: 0, c: 0, d: -1, u: 0, v: 0, w: 1, x: 0, y: 0)
@@ -40,6 +40,19 @@ public class Matrix: BitStreamDecodable {
         self.x = b.next(4).double1616Value
         self.y = b.next(4).double1616Value
         self.w = b.next(4).double0230Value
+    }
+    public func encode() throws -> [UInt8] {
+        return [
+            try a.double1616ToUInt32().encode(),
+            try b.double1616ToUInt32().encode(),
+            try u.double0230ToUInt32().encode(),
+            try c.double1616ToUInt32().encode(),
+            try d.double1616ToUInt32().encode(),
+            try v.double0230ToUInt32().encode(),
+            try x.double1616ToUInt32().encode(),
+            try y.double1616ToUInt32().encode(),
+            try w.double0230ToUInt32().encode()
+        ].flatMap{$0}
     }
 }
 
