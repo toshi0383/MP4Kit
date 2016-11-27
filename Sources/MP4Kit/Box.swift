@@ -16,10 +16,6 @@ public protocol BitStreamRepresentable {
     func bytes() throws -> [UInt8]
 }
 
-func reserve(_ size: Int) -> [UInt8] {
-    return (0..<size).map{UInt8($0)}
-}
-
 public enum BoxType: String, BitStreamRepresentable {
     case ftyp, moov, trak
     case meta, mvhd, tkhd, uuid
