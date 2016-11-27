@@ -24,9 +24,19 @@ class BitSetTests: XCTestCase {
         XCTAssertEqual(BitSet(bytes: bytes), expected)
         XCTAssertEqual(try! BitSet(bytes: bytes).encode(), [255, 0, 0])
     }
+    func testBitSetAllOne() {
+        let bytes: [UInt8] = (0..<3).map{_ in UInt8(UINT8_MAX)}
+        var expected = BitSet(size: 24)
+        for i in (0..<24) {
+            expected[i] = true
+        }
+        XCTAssertEqual(BitSet(bytes: bytes), expected)
+        XCTAssertEqual(try! BitSet(bytes: bytes).encode(), [255, 255, 255])
+    }
     static var allTests: [(String, (BitSetTests) -> () throws -> Void)] {
         return [
             ("testBitSet", testBitSet),
+            ("testBitSetAllOne", testBitSetAllOne),
         ]
     }
 }
