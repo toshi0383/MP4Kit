@@ -18,7 +18,7 @@ public protocol BitStreamRepresentable {
 
 public enum BoxType: String, BitStreamRepresentable {
     case ftyp, moov, trak
-    case meta, mvhd, tkhd, uuid
+    case meta, mvhd, tkhd, uuid, hdlr
     case mdat
     case boxbase, fullboxbase
     public func bytes() throws -> [UInt8] {
