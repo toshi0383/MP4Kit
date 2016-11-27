@@ -30,6 +30,7 @@
 		1F8EA7C31DEAAFDE00955735 /* MovieHeaderBoxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EA7C21DEAAFDE00955735 /* MovieHeaderBoxTests.swift */; };
 		1F8EA7C71DEAC01900955735 /* BitSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EA7C61DEAC01900955735 /* BitSet.swift */; };
 		1F8EA7C91DEAC4F200955735 /* BitSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EA7C81DEAC4F200955735 /* BitSetTests.swift */; };
+		1FB273C51DEADA73001E26A0 /* SharedFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB273C41DEADA73001E26A0 /* SharedFunctionality.swift */; };
 		1FE1CF481DE86257001D1E0B /* ByteWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */; };
 		1FE1CF4A1DE86555001D1E0B /* ByteWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF491DE86555001D1E0B /* ByteWriter.swift */; };
 		1FE1CF4C1DE87AC3001D1E0B /* BitStreamEncodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */; };
@@ -85,6 +86,7 @@
 		1F8EA7C21DEAAFDE00955735 /* MovieHeaderBoxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieHeaderBoxTests.swift; sourceTree = "<group>"; };
 		1F8EA7C61DEAC01900955735 /* BitSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitSet.swift; sourceTree = "<group>"; };
 		1F8EA7C81DEAC4F200955735 /* BitSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitSetTests.swift; sourceTree = "<group>"; };
+		1FB273C41DEADA73001E26A0 /* SharedFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedFunctionality.swift; sourceTree = "<group>"; };
 		1FE1CF471DE86257001D1E0B /* ByteWriterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteWriterTests.swift; sourceTree = "<group>"; };
 		1FE1CF491DE86555001D1E0B /* ByteWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteWriter.swift; sourceTree = "<group>"; };
 		1FE1CF4B1DE87AC3001D1E0B /* BitStreamEncodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitStreamEncodableTests.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				1F8C82551DE454C7008E1D59 /* Matrix.swift */,
 				1F1C92861DD8C04800B6C03F /* MonolithicMP4FileParser.swift */,
 				1F1C92851DD8C04800B6C03F /* MP4.swift */,
+				1FB273C41DEADA73001E26A0 /* SharedFunctionality.swift */,
 				1F1C927C1DD8C04800B6C03F /* Box */,
 			);
 			path = MP4Kit;
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				1FB273C51DEADA73001E26A0 /* SharedFunctionality.swift in Sources */,
 				1F1C928E1DD8C04800B6C03F /* MonolithicMP4FileParser.swift in Sources */,
 				1F270A901DE56B8100D50536 /* ByteBuffer.swift in Sources */,
 				1F21EBC41DE9970200B60CAC /* TrackHeaderBox.swift in Sources */,
