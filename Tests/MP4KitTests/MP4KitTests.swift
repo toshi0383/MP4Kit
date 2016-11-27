@@ -56,7 +56,7 @@ class MP4KitTests: XCTestCase {
             XCTAssert(mdat!.largesize == nil)
             XCTAssert(mdat!.usertype == nil)
             XCTAssertEqual(mdat!.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
-            XCTAssert(mdat!.data.count < Constants.bufferSize)
+            XCTAssert(mdat!.data.count < ByteReader.Constants.bufferSize)
 
             // trak
             let trak = moov.traks[0]
