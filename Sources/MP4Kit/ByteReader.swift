@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension Constants {
-    static let bufferSize: Int = 36
-}
-
 class ByteReader {
+    struct Constants {
+        static let bufferSize: Int = 36
+    }
+
     private let fp: UnsafeMutablePointer<FILE>
     init(path: String) {
         self.fp = fopen(path, "rb")
