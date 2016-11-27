@@ -59,6 +59,10 @@ public class ByteBuffer {
         }
     }
 
+    func hasNext() -> Bool {
+        return bytes.count > position + 1
+    }
+
     func nextBoxBytes() throws -> [UInt8] {
         let (size, boxtype) = try decodeBoxHeader(next(16))
         seek(-16)

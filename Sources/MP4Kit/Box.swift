@@ -17,7 +17,8 @@ public protocol BitStreamEncodable {
 }
 
 public enum BoxType: String, BitStreamEncodable {
-    case ftyp, moov, mvhd, uuid
+    case ftyp, moov, trak
+    case meta, mvhd, tkhd, uuid
     case mdat
     case boxbase, fullboxbase
     public func encode() throws -> [UInt8] {
