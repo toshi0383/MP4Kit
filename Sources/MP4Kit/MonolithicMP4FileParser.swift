@@ -22,6 +22,7 @@ public class MonolithicMP4FileParser {
                 // IntermediateBox knows only size(UInt64) and type(BoxType).
                 boxes.append(try IntermediateBox(bytes: try reader.nextBox{$0 == .mdat}))
             } catch {
+                print("\(error)")
                 continue
             }
         }
