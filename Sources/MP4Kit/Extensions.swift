@@ -69,6 +69,23 @@ extension String {
     }
 }
 
+// MARK: - Double
+extension Double {
+    func double1616ToUInt32() -> UInt32 {
+        return UInt32(self * Double(1 << 16))
+    }
+    func double0230ToUInt32() -> UInt32 {
+        return UInt32(self * Double(1 << 30))
+    }
+}
+
+// MARK: - Float
+extension Float {
+    func float88ToUInt32() -> UInt32 {
+        return UInt32(self * Float(1 << 8))
+    }
+}
+
 // MARK: - Date
 extension Date {
     init(sinceReferenceDate n: UInt64) {
@@ -90,21 +107,39 @@ extension Date {
     }
 }
 
-// MARK: - UInt32
+// MARK: Date
+extension Date {
+    public var uint64Value: UInt64 {
+        return UInt64(self.timeIntervalSince(Constants.referenceDate))
+    }
+    public var uint32Value: UInt32 {
+        return UInt32(self.timeIntervalSince(Constants.referenceDate))
+    }
+}
+
+// MARK: - BitStreamEncodable
+// MARK: UInt16
+extension UInt16: BitStreamEncodable {
+    public func encode() throws -> [UInt8] {
+        return toByteArray(self).reversed()
+    }
+}
+
+// MARK: UInt32
 extension UInt32: BitStreamEncodable {
     public func encode() throws -> [UInt8] {
         return toByteArray(self).reversed()
     }
 }
 
-// MARK: - UInt64
+// MARK: UInt64
 extension UInt64: BitStreamEncodable {
     public func encode() throws -> [UInt8] {
         return toByteArray(self).reversed()
     }
 }
 
-// MARK: - String
+// MARK: String
 extension String: BitStreamEncodable {
     public func encode() throws -> [UInt8] {
         guard self.characters.count == 4 else {
