@@ -39,10 +39,11 @@ public enum HandlerType: String, BitStreamRepresentable {
     case appl
     // Timed Metadata track - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
     case meta
-    // when present in a meta box, contains an appropriate value to indicate the format of the meta box
-    // contents. The value ‘null’ can be used in the primary meta box to indicate that it is merely 
-    // being used to hold resources.
 
+    // Quote from ISO/IEC 14496 Part12
+    // 'when present in a meta box, contains an appropriate value to indicate the format of the meta box
+    // contents. The value ‘null’ can be used in the primary meta box to indicate that it is merely 
+    // being used to hold resources.'
     case null
 
     // MARK: BitStreamRepresentable

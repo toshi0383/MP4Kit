@@ -61,7 +61,6 @@ class MP4KitTests: XCTestCase {
             // meta
             if let meta = moov.meta {
                 XCTAssertEqual(meta.size, 62)
-                XCTAssertEqual(meta.hdlr.size, 50)
             } else {
                 XCTFail("moov/meta does not exist.")
             }
