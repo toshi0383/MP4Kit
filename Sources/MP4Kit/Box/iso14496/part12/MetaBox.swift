@@ -9,7 +9,7 @@
 import Foundation
 
 public final class MetaBox: FullBoxBase {
-    var hdlr: HandlerBox!
+    public var hdlr: HandlerBox!
     public override class func boxType() -> BoxType { return .meta }
     public required init() {
         super.init()
