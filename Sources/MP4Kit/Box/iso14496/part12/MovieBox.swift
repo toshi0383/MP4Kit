@@ -11,6 +11,7 @@ import Foundation
 public final class MovieBox: BoxBase {
     public var mvhd: MovieHeaderBox!
     public var traks: [TrackBox] = []
+    public var meta: MetaBox?
     public override class func boxType() -> BoxType { return .moov }
     public required init() {
         super.init()
@@ -24,18 +25,23 @@ public final class MovieBox: BoxBase {
                 // IntermediateBox knows only size(UInt64) and type(BoxType).
                 boxes.append(try IntermediateBox(bytes: try b.nextBoxBytes()))
             } catch {
+                print("\(error)")
                 break
             }
         }
         let trakBoxes = boxes.filter{$0.type == .trak}
 
         self.mvhd = try boxes <- MovieHeaderBox.self
+        self.meta = try boxes <-? MetaBox.self
         self.traks = try trakBoxes <-| TrackBox.self
     }
     public override func bytes() throws -> [UInt8] {
         var bytes = try super.bytes()
         bytes += try mvhd.bytes()
         bytes += try traks.map{try $0.bytes()}.flatMap{$0}
+        if let meta = meta {
+            bytes += try meta.bytes()
+        }
         return bytes
     }
 }

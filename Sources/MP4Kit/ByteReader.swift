@@ -43,13 +43,12 @@ class ByteReader {
 extension ByteReader {
     func nextBox(shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> [UInt8] {
         let bytes = next(size: Constants.bufferSize)
-        guard let (size, boxtypeOptional) = try? decodeBoxHeader(bytes) else {
-            throw Error(problem: "Couldn't decode Box Header part.")
-        }
-        guard let boxtype = boxtypeOptional else {
+        let size = bytes[0..<4].map{$0}.uint32Value
+        let boxtypeStr = try bytes[4..<8].map{$0}.stringValue()
+        guard let boxtype = BoxType(rawValue: boxtypeStr) else {
             seek(-Constants.bufferSize+Int(size)-1)
             next(size: 1) // fseek does not make feof check enabled.
-            throw Error(problem: "Unknown Box Type.")
+            throw Error(problem: "Failed to detect Box Type from: \(boxtypeStr)")
         }
         if let f = shouldSkipPayload {
             if f(boxtype) {

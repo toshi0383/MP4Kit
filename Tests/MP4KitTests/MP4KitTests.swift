@@ -58,6 +58,13 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(mdat!.data[0..<10], [0, 0, 1, 236, 6, 5, 255, 232, 220, 69])
             XCTAssert(mdat!.data.count < ByteReader.Constants.bufferSize)
 
+            // meta
+            if let meta = moov.meta {
+                XCTAssertEqual(meta.size, 62)
+            } else {
+                XCTFail("moov/meta does not exist.")
+            }
+
             // trak
             let trak = moov.traks[0]
             XCTAssertEqual(trak.size, 83639)
