@@ -8,43 +8,49 @@
 
 import Foundation
 
-public enum HandlerType: String, BitStreamRepresentable {
+public struct HandlerType: RawRepresentable, BitStreamRepresentable {
     /// ObjectDescriptorStream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case odsm
+    public static let odsm = HandlerType(rawValue: "odsm")
     /// ClockReferenceStream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case crsm
+    public static let crsm = HandlerType(rawValue: "crsm")
     /// SceneDescriptionStream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case sdsm
+    public static let sdsm = HandlerType(rawValue: "sdsm")
     /// MPEG7Stream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case m7sm
+    public static let m7sm = HandlerType(rawValue: "m7sm")
     /// ObjectContentInfoStream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case ocsm
+    public static let ocsm = HandlerType(rawValue: "ocsm")
     // IPMP Stream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case ipsm
+    public static let ipsm = HandlerType(rawValue: "ipsm")
     // MPEG-J Stream - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case mjsm
+    public static let mjsm = HandlerType(rawValue: "mjsm")
     // Apple Meta Data iTunes Reader
-    case mdir
+    public static let mdir = HandlerType(rawValue: "mdir")
     // MPEG-7 binary XML
-    case mp7b
+    public static let mp7b = HandlerType(rawValue: "mp7b")
     // MPEG-7 XML
-    case mp7t
+    public static let mp7t = HandlerType(rawValue: "mp7t")
     // Video Track
-    case vide
+    public static let vide = HandlerType(rawValue: "vide")
     // Sound Track
-    case soun
+    public static let soun = HandlerType(rawValue: "soun")
     // Hint Track
-    case hint
+    public static let hint = HandlerType(rawValue: "hint")
     // Apple specific
-    case appl
+    public static let appl = HandlerType(rawValue: "appl")
     // Timed Metadata track - defined in ISO/IEC JTC1/SC29/WG11 - CODING OF MOVING PICTURES AND AUDIO
-    case meta
+    public static let meta = HandlerType(rawValue: "meta")
 
     // Quote from ISO/IEC 14496 Part12
     // 'when present in a meta box, contains an appropriate value to indicate the format of the meta box
     // contents. The value ‘null’ can be used in the primary meta box to indicate that it is merely 
     // being used to hold resources.'
-    case null
+    public static let null = HandlerType(rawValue: "null")
+
+    public var rawValue: String
+
+    public init(rawValue: String) {
+        self.rawValue = rawValue
+    }
 
     // MARK: BitStreamRepresentable
     public func bytes() throws -> [UInt8] {
@@ -63,10 +69,7 @@ public final class HandlerBox: FullBoxBase {
         try super.init(b)
         b.next(4) // pre_defined
         let handlerTypeStr = try b.next(4).stringValue()
-        guard let handlerType = HandlerType(rawValue: handlerTypeStr) else {
-            throw Error(problem: "Unknown handlerType: \(handlerTypeStr)")
-        }
-        self.handlerType = handlerType
+        self.handlerType = HandlerType(rawValue: handlerTypeStr)
         b.next(3) // reserved
         self.name = try b.next(b.endIndex-b.position).stringValue()
     }
