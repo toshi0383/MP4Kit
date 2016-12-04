@@ -48,6 +48,9 @@ public struct HandlerType: RawRepresentable, BitStreamRepresentable {
 
     public var rawValue: String
 
+    /// There may exists unknown new custom HandlerType in the world.
+    /// Let's be friendly here.
+    /// - parameter rawValue:
     public init(rawValue: String) {
         self.rawValue = rawValue
     }
