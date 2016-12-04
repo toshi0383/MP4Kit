@@ -19,7 +19,7 @@ class ByteReader {
     }
     @discardableResult
     func next(size: Int) -> [UInt8] {
-        var buf = Array<UInt8>(repeating: 0, count: size)
+        var buf = [UInt8](repeating: 0, count: size)
         fread(&buf, 1, size, fp)
         return buf
     }
