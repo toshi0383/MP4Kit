@@ -4,7 +4,7 @@ import XCTest
 class MP4KitTests: XCTestCase {
     func parseTest(_ filename: String) {
         do {
-            let mp4 = try MonolithicMP4FileParser(path: filename).parse()
+            let mp4 = try MonolithicMP4FileParser(path: filename).parse{$0 == .mdat}
             guard let container = mp4.container as? ISO14496Part12Container else {
                 XCTFail()
                 return
@@ -110,7 +110,7 @@ class MP4KitTests: XCTestCase {
         }
         self.measure {
             do {
-                _ = try MonolithicMP4FileParser(path: path).parse()
+                _ = try MonolithicMP4FileParser(path: path).parse{$0 == .mdat}
             } catch {
                 XCTFail("\(error)")
             }
@@ -129,11 +129,13 @@ class MP4KitTests: XCTestCase {
         }
         let ftyp = container.ftyp
         let moov = container.moov
+        let mdat = container.mdat!
         let tmppath = temporaryFilePath()
         do {
             let w = ByteWriter(path: tmppath)
             var bytes = try ftyp.bytes()
             bytes += try moov.bytes()
+            bytes += try mdat.bytes()
             w.write(bytes)
             w.close()
             let url = URL(fileURLWithPath: tmppath)

@@ -41,7 +41,7 @@ class ByteReader {
 }
 
 extension ByteReader {
-    func nextBox(shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> [UInt8] {
+    func nextBox(_ shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> [UInt8] {
         let bytes = next(size: Constants.bufferSize)
         let size = bytes[0..<4].map{$0}.uint32Value
         let boxtypeStr = try bytes[4..<8].map{$0}.stringValue()

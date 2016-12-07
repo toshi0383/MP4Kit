@@ -14,13 +14,13 @@ public class MonolithicMP4FileParser {
     public init(path: String) {
         self.reader = ByteReader(path: path)
     }
-    public func parse() throws -> MP4 {
+    public func parse(shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> MP4 {
         var boxes: [IntermediateBox] = []
         while reader.hasNext() {
             do {
                 // Store bytes on IntermediateBox, not parsed yet.
                 // IntermediateBox knows only size(UInt64) and type(BoxType).
-                boxes.append(try IntermediateBox(bytes: try reader.nextBox{$0 == .mdat}))
+                boxes.append(try IntermediateBox(bytes: try reader.nextBox(shouldSkipPayload)))
             } catch {
                 print("\(error)")
                 continue
