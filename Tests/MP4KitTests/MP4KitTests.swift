@@ -151,6 +151,7 @@ class MP4KitTests: XCTestCase {
                 return
             }
             let ftyp = container.ftyp
+            let mdat = container.mdat
             XCTAssertEqual(ftyp.size, 36)
             XCTAssertEqual(ftyp.type, .ftyp)
             XCTAssert(ftyp.largesize == nil)
@@ -159,6 +160,9 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(ftyp.minorVersion, 512)
             XCTAssertEqual(ftyp.compatibleBrands.joined(),
                            ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
+            XCTAssert(mdat != nil)
+            XCTAssertEqual(mdat?.size, 42970771)
+            XCTAssertEqual(mdat?.data.count, 42970771)
         } catch {
             XCTFail("\(error)")
         }
