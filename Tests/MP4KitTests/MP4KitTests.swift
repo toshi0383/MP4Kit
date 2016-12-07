@@ -129,13 +129,19 @@ class MP4KitTests: XCTestCase {
         }
         let ftyp = container.ftyp
         let moov = container.moov
+        XCTAssertEqual(moov.size, UInt32(try! moov.bytes().count))
+        let meta = moov.meta!
+        let hdlr = meta.hdlr!
+        XCTAssertEqual(meta.size, UInt32(try! meta.bytes().count))
+        XCTAssertEqual(hdlr.size, UInt32(try! hdlr.bytes().count))
         let mdat = container.mdat!
         let tmppath = temporaryFilePath()
         do {
             let w = ByteWriter(path: tmppath)
-            var bytes = try ftyp.bytes()
-            bytes += try moov.bytes()
+            var bytes = [UInt8]()
             bytes += try mdat.bytes()
+            bytes += try moov.bytes()
+            bytes += try ftyp.bytes()
             w.write(bytes)
             w.close()
             let url = URL(fileURLWithPath: tmppath)
@@ -162,7 +168,7 @@ class MP4KitTests: XCTestCase {
                            ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
             XCTAssert(mdat != nil)
             XCTAssertEqual(mdat?.size, 42970771)
-            XCTAssertEqual(mdat?.data.count, 42970771)
+            XCTAssertEqual(mdat?.data.count, 42970763)
         } catch {
             XCTFail("\(error)")
         }
