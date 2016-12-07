@@ -21,7 +21,7 @@ private var tmpCounter = 0
 func temporaryFilePath() -> String {
     let url = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
     tmpCounter += 1
-    let path = url.appendingPathComponent("tmp\(tmpCounter)").path
+    let path = url.appendingPathComponent("tmp\(tmpCounter).mp4").path
     print(path)
     return path
 }
