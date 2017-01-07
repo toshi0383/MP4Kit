@@ -8,11 +8,11 @@
 
 import Foundation
 
-final class IntermediateBox {
-    let size: UInt64
-    let type: BoxType
-    let bytes: [UInt8]
-    init(bytes: [UInt8]) throws {
+final public class IntermediateBox {
+    public let size: UInt64
+    public let type: BoxType
+    public let bytes: [UInt8]
+    public init(bytes: [UInt8]) throws {
         self.bytes = bytes
         guard let (size, type) = try? decodeBoxHeader(bytes) else {
             throw Error(problem: "Couldn't parse size or type.")

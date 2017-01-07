@@ -19,3 +19,7 @@ public struct ISO14496Part12Container: MediaContainer {
     public let moov: MovieBox
     public let mdat: MediaDataBox?
 }
+
+public struct IntermediateBoxContainer: MediaContainer {
+    public let boxes: [IntermediateBox]
+}

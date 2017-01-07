@@ -146,6 +146,7 @@
 				1F1C92841DD8C04800B6C03F /* Extensions.swift */,
 				1F270A971DE58E2000D50536 /* IntermediateBox.swift */,
 				1F8C82551DE454C7008E1D59 /* Matrix.swift */,
+				1F1C92861DD8C04800B6C03F /* Parsers.swift */,
 				1F1C92851DD8C04800B6C03F /* MP4.swift */,
 				1F1C92861DD8C04800B6C03F /* Parsers.swift */,
 				1FB273C41DEADA73001E26A0 /* SharedFunctionality.swift */,
