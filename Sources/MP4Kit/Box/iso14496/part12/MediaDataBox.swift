@@ -18,4 +18,9 @@ public class MediaDataBox: BoxBase {
         try super.init(b)
         self.data = b.next(b.endIndex-b.position)
     }
+    public override func bytes() throws -> [UInt8] {
+        var bytes = try super.bytes()
+        bytes += self.data
+        return bytes
+    }
 }

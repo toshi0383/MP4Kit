@@ -13,15 +13,15 @@ public final class FileTypeBox: BoxBase {
     public var minorVersion: UInt32 = 0
     public var compatibleBrands: [String] = []
     public override class func boxType() -> BoxType { return .ftyp }
+    public required init() {
+        super.init()
+    }
     required public init(_ b: ByteBuffer) throws {
         try super.init(b)
         self.majorBrand = try b.next(4).stringValue()
         self.minorVersion = b.next(4).uint32Value
         let brandsStr: String = try b.next(b.endIndex).stringValue()
         self.compatibleBrands = brandsStr.slice(4)
-    }
-    public required init() {
-        super.init()
     }
     public override func bytes() throws -> [UInt8] {
         var bytes = try super.bytes()

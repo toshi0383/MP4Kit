@@ -4,7 +4,7 @@ import XCTest
 class MP4KitTests: XCTestCase {
     func parseTest(_ filename: String) {
         do {
-            let mp4 = try MonolithicMP4FileParser(path: filename).parse()
+            let mp4 = try MonolithicMP4FileParser(path: filename).parse{$0 == .mdat}
             guard let container = mp4.container as? ISO14496Part12Container else {
                 XCTFail()
                 return
@@ -110,7 +110,7 @@ class MP4KitTests: XCTestCase {
         }
         self.measure {
             do {
-                _ = try MonolithicMP4FileParser(path: path).parse()
+                _ = try MonolithicMP4FileParser(path: path).parse{$0 == .mdat}
             } catch {
                 XCTFail("\(error)")
             }
@@ -129,10 +129,15 @@ class MP4KitTests: XCTestCase {
         }
         let ftyp = container.ftyp
         let moov = container.moov
+        let meta = moov.meta!
+        let hdlr = meta.hdlr!
+        let mdat = container.mdat!
         let tmppath = temporaryFilePath()
         do {
             let w = ByteWriter(path: tmppath)
-            var bytes = try ftyp.bytes()
+            var bytes = [UInt8]()
+            bytes += try ftyp.bytes()
+            bytes += try mdat.bytes()
             bytes += try moov.bytes()
             w.write(bytes)
             w.close()
@@ -149,6 +154,7 @@ class MP4KitTests: XCTestCase {
                 return
             }
             let ftyp = container.ftyp
+            let mdat = container.mdat
             XCTAssertEqual(ftyp.size, 36)
             XCTAssertEqual(ftyp.type, .ftyp)
             XCTAssert(ftyp.largesize == nil)
@@ -157,6 +163,9 @@ class MP4KitTests: XCTestCase {
             XCTAssertEqual(ftyp.minorVersion, 512)
             XCTAssertEqual(ftyp.compatibleBrands.joined(),
                            ["isom", "iso2", "avc1", "mp41", "iso5"].joined())
+            XCTAssert(mdat != nil)
+            XCTAssertEqual(mdat?.size, 42970771)
+            XCTAssertEqual(mdat?.data.count, 42970763)
         } catch {
             XCTFail("\(error)")
         }
