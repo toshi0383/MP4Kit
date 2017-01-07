@@ -4,6 +4,7 @@ disabled_rules:
   - opening_brace
   - statement_position
   - variable_name
+  - closure_parameter_position
 line_length: 110
 type_body_length:
   warning: 300
