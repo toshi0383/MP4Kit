@@ -20,7 +20,7 @@ class M4PTests: XCTestCase {
                 XCTFail()
                 return
             }
-            XCTAssertEqual(container.boxes.count, 3)
+            XCTAssertEqual(container.boxes.count, 4)
             print(container.boxes)
         } catch {
             XCTFail("\(error)")
