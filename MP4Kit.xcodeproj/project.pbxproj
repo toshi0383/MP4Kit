@@ -24,6 +24,7 @@
 		1F270A941DE570E900D50536 /* MediaDataBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F270A931DE570E900D50536 /* MediaDataBox.swift */; };
 		1F270A981DE58E2000D50536 /* IntermediateBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F270A971DE58E2000D50536 /* IntermediateBox.swift */; };
 		1F270A9C1DE6785A00D50536 /* LargeSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F270A9B1DE6785A00D50536 /* LargeSizeTests.swift */; };
+		1F7636901E210D5000A908FA /* fromapplemusic.m4p in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F76368F1E210CE600A908FA /* fromapplemusic.m4p */; };
 		1F875B871DE995F80083EDD2 /* TrackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F875B861DE995F80083EDD2 /* TrackBox.swift */; };
 		1F8C82541DE431B6008E1D59 /* ByteReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */; };
 		1F8C82561DE454C7008E1D59 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8C82551DE454C7008E1D59 /* Matrix.swift */; };
@@ -58,6 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				1F7636901E210D5000A908FA /* fromapplemusic.m4p in CopyFiles */,
 				1F1C92661DD8AFF900B6C03F /* ftyp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +84,7 @@
 		1F270A931DE570E900D50536 /* MediaDataBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaDataBox.swift; sourceTree = "<group>"; };
 		1F270A971DE58E2000D50536 /* IntermediateBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntermediateBox.swift; sourceTree = "<group>"; };
 		1F270A9B1DE6785A00D50536 /* LargeSizeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeSizeTests.swift; sourceTree = "<group>"; };
+		1F76368F1E210CE600A908FA /* fromapplemusic.m4p */ = {isa = PBXFileReference; lastKnownFileType = file; path = fromapplemusic.m4p; sourceTree = "<group>"; };
 		1F875B861DE995F80083EDD2 /* TrackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackBox.swift; sourceTree = "<group>"; };
 		1F8C82531DE431B6008E1D59 /* ByteReaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteReaderTests.swift; sourceTree = "<group>"; };
 		1F8C82551DE454C7008E1D59 /* Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		1F1C92631DD8AF5E00B6C03F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F76368F1E210CE600A908FA /* fromapplemusic.m4p */,
 				1F1C92641DD8AF5E00B6C03F /* ftyp */,
 			);
 			path = Resources;
