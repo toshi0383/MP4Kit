@@ -44,6 +44,9 @@ extension ByteReader {
     func nextBox(_ shouldSkipPayload: ((BoxType) -> Bool)? = nil) throws -> [UInt8] {
         let bytes = next(size: Constants.bufferSize)
         let size = bytes[0..<4].map{$0}.uint32Value
+        guard size > 0 else {
+            throw Error(problem: "Box size is unexpectedly 0. Something must have gone wrong!")
+        }
         let boxtypeStr = try bytes[4..<8].map{$0}.stringValue()
         guard let boxtype = BoxType(rawValue: boxtypeStr) else {
             seek(-Constants.bufferSize+Int(size)-1)
